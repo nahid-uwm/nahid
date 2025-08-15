@@ -35,6 +35,17 @@
             cursor: none;
         }
 
+        /* Hide custom cursor on mobile devices */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            
+            .cursor {
+                display: none;
+            }
+        }
+
         .orbitron {
             font-family: 'Orbitron', monospace;
         }
@@ -412,7 +423,7 @@
         }
 
         .mobile-menu-btn-open span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(4px, 4px);
         }
 
         .mobile-menu-btn-open span:nth-child(2) {
@@ -420,7 +431,7 @@
         }
 
         .mobile-menu-btn-open span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         /* Mobile Navigation Links */
@@ -727,8 +738,8 @@
     </div>
 
     <!-- Omnibar -->
-    <nav class="omnibar hud-border p-4">
-        <div class="container mx-auto flex items-center justify-between">
+    <nav class="omnibar hud-border p-3">
+        <div class="container mx-auto flex items-center justify-between min-h-[3rem]">
             <div class="orbitron font-bold text-xl glitch-text" data-text="MD NAHID HASAN">MD NAHID HASAN</div>
             
             <!-- Desktop Navigation -->
@@ -748,10 +759,10 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button id="mobileMenuBtn" class="md:hidden w-10 h-10 flex flex-col justify-center items-center space-y-1 border border-cyan-400 bg-black/50 backdrop-blur-lg rounded ml-auto">
-                <span class="block w-6 h-0.5 bg-cyan-400 transition-all duration-300"></span>
-                <span class="block w-6 h-0.5 bg-cyan-400 transition-all duration-300"></span>
-                <span class="block w-6 h-0.5 bg-cyan-400 transition-all duration-300"></span>
+            <button id="mobileMenuBtn" class="md:hidden w-8 h-8 flex flex-col justify-center items-center space-y-1 border border-cyan-400 bg-black/50 backdrop-blur-lg rounded">
+                <span class="block w-5 h-0.5 bg-cyan-400 transition-all duration-300"></span>
+                <span class="block w-5 h-0.5 bg-cyan-400 transition-all duration-300"></span>
+                <span class="block w-5 h-0.5 bg-cyan-400 transition-all duration-300"></span>
             </button>
         </div>
 
@@ -3063,5 +3074,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f9a5fec494e830',t:'MTc1NTI3MDkzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96fa6fcd26e560a7',t:'MTc1NTI3OTIwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
