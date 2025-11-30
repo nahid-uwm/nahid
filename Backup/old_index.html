@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD NAHID HASAN - VR Research Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Tektur:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent-primary: #22d3ee;
+            --accent-secondary: #00b2b7;
+            --accent-tertiary: #ff0080;
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #fff;
+            --text-secondary: #b0b0c0;
+            --color-blue: rgba(17,36,55,1);
+        }
+
+        * {
+            cursor: none !important;
+        }
+
+        @media (max-width: 768px) {
+            * {
+                cursor: auto !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .tektur {
+            font-family: 'Tektur', monospace;
+        }
+
+        .hud-card {
+            background: rgba(26, 26, 46, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hud-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .hud-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .hud-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .hud-button {
+            margin: 10px 20px;
+            padding: 12px 24px;
+            position: relative;
+            background-color: #1a1a2e99;
+            border: 1px solid #00ffff4d;
+            color: var(--accent-primary);
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            outline: none;
+            cursor: pointer;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 16px;
+            transition: all 0.35s cubic-bezier(0.75, 0, 0.25, 1);
+            min-height: auto;
+            min-width: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .hud-button:first-of-type {
+            margin-left: 0px;
+        }
+
+        .hud-button:last-of-type {
+            margin-right: 0px;
+        }
+
+        .hud-button:hover {
+            position: relative;
+            border: 1px solid transparent;
+            background-color: var(--accent-primary);
+            color: var(--bg-secondary);
+            animation: 0.07s flicker;
+            animation-iteration-count: 2;
+            transition: all 0.35s cubic-bezier(0.75, 0, 0.25, 1);
+        }
+
+        .hud-button:focus {
+            background-color: var(--accent-secondary);
+        }
+
+        .decorator {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 1px solid transparent;
+            animation: 0.1s flicker;
+            animation-iteration-count: 3;
+            transition: all 0.35s cubic-bezier(0.75, 0, 0.25, 1);
+        }
+
+        .decorator.top {
+            top: -1px;
+            border-top: 1px solid var(--accent-primary);
+        }
+
+        .decorator.bottom {
+            bottom: -1px;
+            border-bottom: 1px solid var(--accent-primary);
+        }
+
+        .decorator.left {
+            left: -1px;
+            border-left: 1px solid var(--accent-primary);
+        }
+
+        .decorator.right {
+            right: -1px;
+            border-right: 1px solid var(--accent-primary);
+        }
+
+        .hud-button:hover .decorator.top {
+            top: -16px;
+            border-top: 1px solid var(--accent-primary);
+        }
+
+        .hud-button:hover .decorator.bottom {
+            bottom: -16px;
+            border-bottom: 1px solid var(--accent-primary);
+        }
+
+        .hud-button:hover .decorator.left {
+            left: -16px;
+            border-left: 1px solid var(--accent-primary);
+        }
+
+        .hud-button:hover .decorator.right {
+            right: -16px;
+            border-right: 1px solid var(--accent-primary);
+        }
+
+        @keyframes flicker {
+            0%, 50% {
+                opacity: 0;
+            }
+            51%, 100% {
+                opacity: 1;
+            }
+        }
+
+        .badge {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            color: var(--accent-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: none;
+            will-change: transform;
+        }
+
+        .custom-cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .custom-cursor::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .cursor-hover {
+            transform: scale(1.5);
+            border-color: var(--accent-tertiary);
+            box-shadow: 0 0 20px var(--accent-tertiary);
+        }
+
+        .cursor-click {
+            transform: scale(0.8);
+            border-color: var(--accent-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .custom-cursor {
+                display: none;
+            }
+        }
+
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 255, 0.03) 2px,
+                rgba(0, 255, 255, 0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch:hover::before,
+        .glitch:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch:hover::before {
+            animation: glitch-1 0.3s infinite;
+            color: var(--accent-primary);
+            z-index: -1;
+        }
+
+        .glitch:hover::after {
+            animation: glitch-2 0.3s infinite;
+            color: var(--accent-tertiary);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+            15%, 49% { transform: translate(-2px, 0); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+            21%, 62% { transform: translate(2px, 0); }
+        }
+
+        .progress-dots {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            border-radius: 50%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: var(--accent-primary);
+            box-shadow: 0 0 15px var(--accent-primary);
+        }
+
+        /* Hide progress dots on mobile and tablet */
+        @media (max-width: 1024px) {
+            .progress-dots {
+                display: none;
+            }
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 15, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(0, 255, 255, 0.2);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            padding: 80px 30px 30px;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 18px;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile menu overlay */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--accent-primary);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile and Tablet Responsive Styles */
+        @media (max-width: 768px) {
+            /* Hero Section */
+            .hero-button {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            /* Navigation */
+            .tektur {
+                font-size: 1rem;
+            }
+
+            /* Cards and sections */
+            .hud-card {
+                margin: 0 10px;
+            }
+
+            /* Stats grid */
+            .grid.grid-cols-2.md\\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            /* About section gear items */
+            .grid.grid-cols-1.md\\:grid-cols-3 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* Projects grid */
+            .grid.grid-cols-1.md\\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            /* Timeline adjustments */
+            .ml-20 {
+                margin-left: 3rem;
+            }
+
+            .absolute.left-6 {
+                left: 1rem;
+            }
+
+            .absolute.left-8 {
+                left: 1rem;
+            }
+
+            /* Button text size */
+            .hud-button {
+                font-size: 0.75rem;
+                padding: 8px 16px;
+            }
+
+            /* Section padding */
+            .py-20 {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+
+            /* Text sizes */
+            h1.tektur {
+                font-size: 2.5rem;
+            }
+
+            h2.tektur {
+                font-size: 2rem;
+            }
+
+            h3.tektur {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small screens */
+            .container.mx-auto {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .max-w-7xl {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            /* Hero title */
+            h1.tektur {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            /* Timeline further adjustments */
+            .ml-20 {
+                margin-left: 2rem;
+            }
+
+            .absolute.left-6 {
+                left: 0.5rem;
+            }
+
+            .absolute.left-8 {
+                left: 0.5rem;
+            }
+
+            /* Mobile menu width */
+            .mobile-menu {
+                width: 100%;
+                right: -100%;
+            }
+
+            /* Button adjustments */
+            .hud-button {
+                font-size: 0.7rem;
+                padding: 6px 12px;
+                min-height: 36px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* Tablet styles */
+            .grid.grid-cols-1.md\\:grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid.grid-cols-2.md\\:grid-cols-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .grid.grid-cols-1.md\\:grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Starfield Background -->
+    <div class="starfield" id="starfield"></div>
+
+    <!-- Progress Dots -->
+    <div class="progress-dots">
+        <div class="progress-dot active" data-section="hero"></div>
+        <div class="progress-dot" data-section="about"></div>
+        <div class="progress-dot" data-section="research"></div>
+        <div class="progress-dot" data-section="publications"></div>
+        <div class="progress-dot" data-section="education"></div>
+        <div class="progress-dot" data-section="projects"></div>
+        <div class="progress-dot" data-section="teaching"></div>
+        <div class="progress-dot" data-section="lab"></div>
+        <div class="progress-dot" data-section="contact"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-cyan-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="tektur font-bold text-xl glitch" data-text="MD NAHID HASAN">
+                    MD NAHID HASAN
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex space-x-8">
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#research" class="hover:text-cyan-400 transition-colors">Research</a>
+                    <a href="#publications" class="hover:text-cyan-400 transition-colors">Publications</a>
+                    <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#teaching" class="hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#lab" class="hover:text-cyan-400 transition-colors">Lab</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="flex flex-col space-y-6">
+            <a href="#about" class="text-lg hover:text-cyan-400 transition-colors mobile-link">About</a>
+            <a href="#research" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Research</a>
+            <a href="#publications" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Publications</a>
+            <a href="#education" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Education</a>
+            <a href="#projects" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Projects</a>
+            <a href="#teaching" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Experience</a>
+            <a href="#lab" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Lab</a>
+            <a href="#contact" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative">
+        <div class="text-center z-10">
+            <h1 class="tektur font-bold text-4xl md:text-6xl lg:text-8xl mb-4 text-white glitch" data-text="MD NAHID HASAN">
+                MD NAHID HASAN
+            </h1>
+            <p class="text-xl md:text-2xl mb-2 font-semibold text-[var(--accent-primary)]">
+  I Make VR Fun… Then Run Experiments On It
+</p>
+<p class="text-lg mb-8 text-[var(--text-secondary)]">
+  MS CS @ UW-Milwaukee • TA/RA • HEXLab
+</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <button class="hud-button hero-button" onclick="scrollToSection('publications')">
+                    <div class="decorator top left"></div>
+                    <div class="decorator top right"></div>
+                    <div class="decorator bottom left"></div>
+                    <div class="decorator bottom right"></div>
+                    View Publications
+                </button>
+                <button class="hud-button hero-button" id="downloadCV">
+                    <div class="decorator top left"></div>
+                    <div class="decorator top right"></div>
+                    <div class="decorator bottom left"></div>
+                    <div class="decorator bottom right"></div>
+                    Download CV
+                </button>
+            </div>
+
+            <!-- Mini Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="hud-card p-4 text-center">
+                    <div class="text-2xl font-bold text-cyan-400">4</div>
+                    <div class="text-sm text-gray-400">Papers</div>
+                </div>
+                <div class="hud-card p-4 text-center">
+                    <div class="text-2xl font-bold text-cyan-400">2</div>
+                    <div class="text-sm text-gray-400">Active Studies</div>
+                </div>
+                <div class="hud-card p-4 text-center">
+                    <div class="text-2xl font-bold text-cyan-400">9</div>
+                    <div class="text-sm text-gray-400">Projects</div>
+                </div>
+                <div class="hud-card p-4 text-center">
+                    <div class="text-2xl font-bold text-cyan-400">1</div>
+                    <div class="text-sm text-gray-400">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+<!-- About Section -->
+<section id="about" class="py-20 px-4 max-w-7xl mx-auto">
+  <h2 class="tektur text-4xl font-bold mb-12 text-center text-white">About</h2>
+
+  <!-- First Row: Text + Image -->
+  <div class="grid lg:grid-cols-2 gap-8 items-center">
+    <!-- Text Block -->
+    <div>
+      <p class="text-lg mb-6 leading-relaxed">
+        Throughout my life, I've been fascinated by design and technology that make life easier and more enjoyable. From the bumpy yellow dots on sidewalks to 3D glasses, the little things that make our lives more accessible and immersive always make me pause and ask: how can we create things that feel more humane?
+      </p>
+      <p class="text-lg mb-6 leading-relaxed">
+        With virtual reality and artificial intelligence shaping the future, my goal is to direct these powerful tools toward human needs, focusing on wellness, safety, and perception.
+      </p>
+      <p class="text-lg mb-6 leading-relaxed">
+        My current project involves locomotion in VR, using simulations to evaluate pedestrian safety and explore drivers' blind spots.
+      </p>
+    </div>
+
+    <!-- Image Block -->
+    <div class="flex justify-center">
+      <div class="hud-card w-80 h-96 overflow-hidden">
+        <img src="https://github.com/nahid-uwm/image/blob/main/Nahid%20Photo/nahid.jpg?raw=true" alt="MD Nahid Hasan" class="w-full h-full object-cover"
+          onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<div class=\'text-6xl p-8 flex items-center justify-center\'>👨‍💻</div>';">
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Row: Research Interest + Gear Arsenal -->
+  <div class="grid lg:grid-cols-2 gap-8 mt-16">
+    <!-- Research Interest -->
+    <div>
+      <h3 class="tektur text-xl font-bold mb-4 text-cyan-400">Research Interest</h3>
+      <div class="flex flex-wrap gap-2 mb-8">
+        <span class="badge">Virtual Reality</span>
+        <span class="badge">VR Locomotion</span>
+        <span class="badge">Perception and Attention in VR</span>
+        <span class="badge">Transportation</span>
+        <span class="badge">Road and Pedestrian safety</span>
+        <span class="badge">HCI</span>
+        <span class="badge">AI/ML</span>
+        <span class="badge">Wellness and Health</span>
+        <span class="badge">Therapy</span>
+      </div>
+    </div>
+
+<!-- Gear Arsenal -->
+<div>
+  <!-- Title now matches Research Interest -->
+  <h3 class="tektur text-xl font-bold mb-4 text-cyan-400">GEAR ARSENAL</h3>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Item 1: GODOT -->
+    <div class="hud-card p-6 text-center relative gear-item" data-tooltip="Game Engine for VR Development">
+      <div class="w-12 h-12 mx-auto mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 64 61" fill="none">
+                                <path d="M4.07481 24.4689V38.0292V39.7515V41.3189C4.10563 41.3192 4.13645 41.3203 4.16699 41.3232L14.4972 42.3192C15.0383 42.3714 15.4624 42.807 15.5 43.3492L15.8185 47.9093L24.8296 48.5522L25.4503 44.3435C25.5308 43.7978 25.9989 43.3934 26.5508 43.3934H37.4495C38.0012 43.3934 38.4692 43.7978 38.5497 44.3435L39.1704 48.5522L48.1818 47.9093L48.5 43.3492C48.538 42.807 48.9618 42.3717 49.5029 42.3192L59.8291 41.3232C59.8596 41.3203 59.8901 41.3192 59.921 41.3189V39.9744L59.9252 39.973V24.4689H59.9635C61.3319 22.7223 62.5982 20.8817 63.8126 18.9182C62.1998 16.1727 60.2238 13.7192 58.1115 11.446C56.1526 12.4321 54.2499 13.5491 52.4527 14.7378C51.5534 13.8439 50.5406 13.1127 49.5457 12.3484C48.5682 11.5633 47.4666 10.9877 46.4218 10.317C46.7328 8.00043 46.8867 5.71984 46.9486 3.33964C44.2528 1.98287 41.378 1.08331 38.4701 0.437172C37.3091 2.38842 36.2474 4.50149 35.3227 6.56718C34.2262 6.38395 33.1246 6.31603 32.0216 6.3029V6.30119C32.0139 6.30119 32.0067 6.3029 32.0002 6.3029C31.9933 6.3029 31.9862 6.30119 31.9793 6.30119V6.3029C30.8743 6.31603 29.7735 6.38395 28.6767 6.56718C27.7526 4.50149 26.6915 2.38842 25.5288 0.437172C22.6224 1.08331 19.7473 1.98287 17.0517 3.33964C17.1134 5.71984 17.2672 8.00043 17.5791 10.317C16.5323 10.9877 15.4321 11.5633 14.4543 12.3484C13.4609 13.1127 12.4463 13.8439 11.5467 14.7378C9.74961 13.5491 7.84745 12.4321 5.88792 11.446C3.77571 13.7192 1.80078 16.1727 0.187439 18.9182C1.40122 20.8817 2.66838 22.7223 4.03657 24.4689H4.07481Z" fill="#478CBF"/>
+                                <path d="M50.6537 44.4434L50.3337 49.0277C50.2952 49.5802 49.8557 50.02 49.3032 50.0597L38.2997 50.8448C38.2729 50.8468 38.2461 50.8477 38.2196 50.8477C37.6727 50.8477 37.201 50.4464 37.1202 49.8973L36.4892 45.6181H27.511L26.8799 49.8973C26.7952 50.4733 26.2803 50.8874 25.7004 50.8448L14.697 50.0597C14.1445 50.02 13.705 49.5802 13.6664 49.0277L13.3465 44.4434L4.05774 43.5478C4.06202 44.5462 4.07487 45.6398 4.07487 45.8576C4.07487 55.6677 16.5195 60.383 31.9811 60.4373H31.9999H32.0191C47.4806 60.383 59.921 55.6677 59.921 45.8576C59.921 45.6358 59.9344 44.5467 59.939 43.5478L50.6537 44.4434Z" fill="#478CBF"/>
+                                <path d="M23.5816 31.309C23.5816 34.7486 20.7947 37.5349 17.3563 37.5349C13.9196 37.5349 11.1318 34.7486 11.1318 31.309C11.1318 27.8717 13.9196 25.0868 17.3563 25.0868C20.7947 25.0868 23.5816 27.8717 23.5816 31.309Z" fill="white"/>
+                                <path d="M22.0838 31.6781C22.0838 33.9595 20.2347 35.8086 17.9515 35.8086C15.6695 35.8086 13.8193 33.9595 13.8193 31.6781C13.8193 29.3966 15.6695 27.5458 17.9515 27.5458C20.2347 27.5458 22.0838 29.3966 22.0838 31.6781Z" fill="#414042"/>
+                                <path d="M31.9995 38.1013C30.8928 38.1013 29.9958 37.2857 29.9958 36.2802V30.5492C29.9958 29.5446 30.8928 28.7281 31.9995 28.7281C33.1063 28.7281 34.0053 29.5446 34.0053 30.5492V36.2802C34.0053 37.2857 33.1063 38.1013 31.9995 38.1013Z" fill="white"/>
+                                <path d="M40.4185 31.309C40.4185 34.7486 43.2053 37.5349 46.6444 37.5349C50.0808 37.5349 52.8683 34.7486 52.8683 31.309C52.8683 27.8717 50.0808 25.0868 46.6444 25.0868C43.2053 25.0868 40.4185 27.8717 40.4185 31.309Z" fill="white"/>
+                                <path d="M41.9168 31.6781C41.9168 33.9595 43.7653 35.8086 46.0468 35.8086C48.3305 35.8086 50.179 33.9595 50.179 31.6781C50.179 29.3966 48.3305 27.5458 46.0468 27.5458C43.7653 27.5458 41.9168 29.3966 41.9168 31.6781Z" fill="#414042"/>
+                            </svg>
+      </div>
+      <div class="font-bold">GODOT</div>
+      <div class="text-sm text-gray-400">Game Engine</div>
+    </div>
+
+    <!-- Item 2: META QUEST 2 -->
+    <div class="hud-card p-6 text-center relative gear-item" data-tooltip="Primary VR Testing Device">
+      <div class="w-12 h-12 mx-auto mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 91 61" fill="none">
+                                <path d="M10.3706 40.0686C10.3706 43.5178 11.1277 46.166 12.1172 47.7681C13.4146 49.8665 15.3497 50.7555 17.3224 50.7555C19.8669 50.7555 22.1947 50.1241 26.6805 43.9199C30.2743 38.9471 34.5088 31.967 37.358 27.5911L42.1832 20.1775C45.535 15.0288 49.4146 9.30524 53.8627 5.42565C57.4942 2.25916 61.4114 0.5 65.3538 0.5C71.9727 0.5 78.2774 4.3356 83.1025 11.5293C88.3832 19.4079 90.9465 29.3314 90.9465 39.5722C90.9465 45.6602 89.7465 50.1335 87.7046 53.6675C85.7318 57.0853 81.8868 60.5 75.4188 60.5V50.7555C80.957 50.7555 82.3392 45.6665 82.3392 39.8424C82.3392 31.5429 80.4041 22.3325 76.1413 15.7513C73.1161 11.0832 69.1957 8.23089 64.8826 8.23089C60.2177 8.23089 56.4638 11.7492 52.2449 18.0225C50.002 21.3555 47.6994 25.4173 45.114 30.0005L42.268 35.0424C36.5507 45.1796 35.1025 47.4885 32.2439 51.299C27.2334 57.9712 22.9549 60.5 17.3224 60.5C10.6407 60.5 6.41562 57.6068 3.79887 53.2466C1.66274 49.6937 0.613525 45.0319 0.613525 39.7199L10.3706 40.0686Z" fill="#0081FB"/>
+                                <path d="M8.3067 12.2173C12.78 5.32199 19.2355 0.5 26.6397 0.5C30.9276 0.5 35.1905 1.76911 39.6418 5.40366C44.5109 9.37749 49.7004 15.9209 56.1748 26.7052L58.4962 30.5754C64.1004 39.9115 67.2889 44.7147 69.1549 46.9796C71.5549 49.8885 73.2355 50.7555 75.4187 50.7555C80.957 50.7555 82.3392 45.6665 82.3392 39.8424L90.9465 39.5722C90.9465 45.6602 89.7465 50.1335 87.7046 53.6675C85.7318 57.0853 81.8868 60.5 75.4187 60.5C71.3978 60.5 67.8355 59.6267 63.8962 55.9105C60.868 53.0581 57.3276 47.9911 54.6041 43.4361L46.5025 29.9031C42.4376 23.1115 38.7088 18.0476 36.5507 15.7545C34.2292 13.2885 31.2449 10.3105 26.4826 10.3105C22.6282 10.3105 19.3549 13.0152 16.6156 17.1524L8.3067 12.2173Z" fill="url(#paint0_linear_1169_423)"/>
+                                <path d="M26.4826 10.3105C22.6282 10.3105 19.3549 13.0152 16.6156 17.1524C12.7423 22.9984 10.3706 31.7063 10.3706 40.0686C10.3706 43.5178 11.1277 46.166 12.1172 47.7681L3.79887 53.2466C1.66274 49.6937 0.613525 45.0319 0.613525 39.7199C0.613525 30.0602 3.26483 19.9921 8.30672 12.2173C12.78 5.32199 19.2355 0.5 26.6397 0.5L26.4826 10.3105Z" fill="url(#paint1_linear_1169_423)"/>
+                                <defs>
+                                    <linearGradient id="paint0_linear_1169_423" x1="19.7758" y1="37.2539" x2="81.9748" y2="40.3953" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#0064E1"/>
+                                        <stop offset="0.4" stop-color="#0064E1"/>
+                                        <stop offset="0.83" stop-color="#0073EE"/>
+                                        <stop offset="1" stop-color="#0082FB"/>
+                                    </linearGradient>
+                                    <linearGradient id="paint1_linear_1169_423" x1="14.7497" y1="44.1649" x2="14.7497" y2="21.233" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#0082FB"/>
+                                        <stop offset="1" stop-color="#0064E0"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+      </div>
+      <div class="font-bold">META QUEST 2</div>
+      <div class="text-sm text-gray-400">VR Headset</div>
+    </div>
+
+    <!-- Item 3: VARJO XR-4 -->
+    <div class="hud-card p-6 text-center relative gear-item" data-tooltip="Advanced XR Research Platform">
+      <div class="w-24 h-12 mx-auto mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 209 26" fill="none">
+                                <path d="M183.262 0H208.371V25.106H202.656V5.711H183.262V0ZM175.016 19.395V0H180.731V19.395H200.125V25.106H175.016V19.395ZM132.192 19.395H151.586V0H157.297V25.106H132.192V19.395ZM101.957 5.711V0H127.07V5.711H107.672V25.106H101.957V5.711ZM46.723 21.071L67.793 0L88.867 21.071L84.828 25.114L67.793 8.07799L50.758 25.114L46.723 21.071ZM38.11 0L42.149 4.03899L21.074 25.114L0 4.03899L4.043 0L21.074 17.032L38.11 0Z" fill="white"/>
+                            </svg>
+      </div>
+      <div class="font-bold">VARJO XR-4</div>
+      <div class="text-sm text-gray-400">XR Device</div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Research Section -->
+    <section id="research" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="tektur text-4xl font-bold mb-12 text-center text-white">RESEARCH</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Research 1 - Guided Walking Speed -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] bg-gradient-to-br from-cyan-900 to-blue-900 rounded mb-4 flex items-center justify-center">
+                        <span class="text-4xl">🚶‍♂️</span>
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">EVALUATION OF GUIDED WALKING SPEED TECHNIQUES IN VIRTUAL REALITY</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">ACTIVE</span>
+                        <span class="badge">VR Locomotion</span>
+                        <span class="badge">Research</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Evaluating different guided walking techniques to effectively control the walking speed of the user to reduce confounding variables in VR locomotion research.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <button class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            Open Dossier
+                        </button>
+                        <button class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            Video
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Research 2 - Driver Blind Spots -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] bg-gradient-to-br from-blue-900 to-purple-900 rounded mb-4 flex items-center justify-center">
+                        <span class="text-4xl">🚛</span>
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SIMULATING DRIVER BLIND SPOTS WITH VR: IMPLICATIONS FOR PEDESTRIAN SAFETY</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">ACTIVE</span>
+                        <span class="badge">Safety Research</span>
+                        <span class="badge">VR Simulation</span>
+                        <span class="badge">Transportation</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Advance VR simulation to test the blind spot of vehicles of different heights, such as trucks and cars, and how it affects the safety of pedestrians and other vehicles.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <button class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            Open Dossier
+                        </button>
+                        <button class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-20 px-4 max-w-7xl mx-auto">
+        <h2 class="tektur text-4xl font-bold mb-12 text-center text-white">Publications</h2>
+        
+        <div class="space-y-6">
+            <div class="hud-card p-6" data-type="conference">
+                <h3 class="tektur text-lg font-bold mb-2">Shore Defender: A VR Edutainment Game Aiming to Raise Public Awareness on Ocean Conservation and Plastic Recycling</h3>
+                <p class="text-sm text-gray-400 mb-2">Authors: Md Azizul Hakim, <span class="text-cyan-400 font-bold">Md Nahid Hasan</span>, Randall Sanders, Jerald Thomas</p>
+                <p class="text-sm text-gray-400 mb-2">IEEE VR</p>
+                <p class="mb-4">Multiplayer virtual reality edutainment game designed to raise public awareness about ocean conservation and plastic recycling through novel interaction technique and and immersive gameplay experiences.</p>
+                <div class="flex gap-2">
+                    <a href="https://ieeexplore.ieee.org/abstract/document/10972693" target="_blank" class="hud-button text-xs">
+                        <div class="decorator top left"></div>
+                        <div class="decorator top right"></div>
+                        <div class="decorator bottom left"></div>
+                        <div class="decorator bottom right"></div>
+                        View
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hud-card p-6" data-type="journal">
+                <h3 class="tektur text-lg font-bold mb-2">Advancing Breast Cancer Diagnosis: Attention-Enhanced U-Net for Breast Cancer Segmentation</h3>
+                <p class="text-sm text-gray-400 mb-2">Authors: <span class="text-cyan-400 font-bold">Md Nahid Hasan</span>, Adit Ishraq, Ashraful Alam Emon, Jungpil Shin, Md Mohsin Kabir</p>
+                <p class="text-sm text-gray-400 mb-2">Springer</p>
+                <p class="mb-4">An attention-enhanced U-Net with saliency mechanisms improves breast cancer segmentation, offering greater accuracy, efficiency, and adaptability than conventional models while showing promise for wider medical imaging use.</p>
+                <div class="flex gap-2">
+                    <a href="https://link.springer.com/chapter/10.1007/. _11" target="_blank" class="hud-button text-xs">
+                        <div class="decorator top left"></div>
+                        <div class="decorator top right"></div>
+                        <div class="decorator bottom left"></div>
+                        <div class="decorator bottom right"></div>
+                        View
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hud-card p-6" data-type="journal">
+                <h3 class="tektur text-lg font-bold mb-2">Road sign detection using variants of yolo and r-cnn: An analysis from the perspective of bangladesh</h3>
+                <p class="text-sm text-gray-400 mb-2">Authors: Aklima Akter Lima, Md Mohsin Kabir, Sujoy Chandra Das, <span class="text-cyan-400 font-bold">Md Nahid Hasan</span>, MF Mridha</p>
+                <p class="text-sm text-gray-400 mb-2">Springer</p>
+                <p class="mb-4">Using the BDRS 2021 dataset, this study identifies YOLOv3 and Faster R-CNN as the most effective among seven models for real-time road sign detection, thereby enhancing ADAS systems to improve driver awareness and road safety.</p>
+                <div class="flex gap-2">
+                    <a href="https://link.springer.com/chapter/10.1007/. _42" target="_blank" class="hud-button text-xs">
+                        <div class="decorator top left"></div>
+                        <div class="decorator top right"></div>
+                        <div class="decorator bottom left"></div>
+                        <div class="decorator bottom right"></div>
+                        View
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hud-card p-6" data-type="journal">
+                <h3 class="tektur text-lg font-bold mb-2">Information-based mobile application to tackle covid-19 circumstances</h3>
+                <p class="text-sm text-gray-400 mb-2">Authors: Sakhawat Hossain, <span class="text-cyan-400 font-bold">Md Nahid Hasan</span>, Md Nazibul Islam, Mamunur Rashid Mukto, Md Shahnewaz Abid, Fahima Khanam</p>
+                <p class="text-sm text-gray-400 mb-2">Journal of Scientific Research and Reports</p>
+                <p class="mb-4">An accessible IoMT-driven HCI application integrates real-time health monitoring, COVID-19 tracking, and telemedicine services to strengthen pandemic response and improve healthcare delivery in developing countries</p>
+                <div class="flex gap-2">
+                    <a href="https://www.researchgate.net/publication/349917319_Information-Based_Mobile_Application_to_Tackle_COVID-19_Circumstances" target="_blank" class="hud-button text-xs">
+                        <div class="decorator top left"></div>
+                        <div class="decorator top right"></div>
+                        <div class="decorator bottom left"></div>
+                        <div class="decorator bottom right"></div>
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="tektur text-4xl font-bold mb-12 text-center text-white">EDUCATION</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Timeline Container -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 via-cyan-400 to-transparent"></div>
+                    
+                    <!-- MS Degree -->
+                    <div class="relative mb-12">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-6 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-900 shadow-lg shadow-cyan-400/50"></div>
+                        
+                        <!-- Content Card -->
+                        <div class="ml-20 hud-card p-6">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">MS IN COMPUTER SCIENCE</h3>
+                                    <p class="text-lg font-semibold">University of Wisconsin-Milwaukee</p>
+                                    <p class="text-gray-400">Wisconsin, USA</p>
+                                </div>
+                                <div class="text-right mt-4 md:mt-0">
+                                    <div class="tektur font-bold text-cyan-400">Sep 2024 - Present</div>
+                                    <div class="text-sm text-gray-400">Current</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">VR</span>
+                                <span class="badge">HCI</span>
+                                <span class="badge">AI</span>
+                                <span class="badge">ML</span>
+                                <span class="badge">UI</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- BSc Degree -->
+                    <div class="relative">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-6 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-900 shadow-lg shadow-cyan-400/50"></div>
+                        
+                        <!-- Content Card -->
+                        <div class="ml-20 hud-card p-6">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">BSC ENGG IN COMPUTER SCIENCE AND ENGINEERING</h3>
+                                    <p class="text-lg font-semibold">Bangladesh University of Business and Technology</p>
+                                    <p class="text-gray-400">Dhaka, Bangladesh</p>
+                                    <p class="text-sm text-gray-400 mt-2">Major: Artificial Intelligence and Expert System</p>
+                                </div>
+                                <div class="text-right mt-4 md:mt-0">
+                                    <div class="tektur font-bold text-cyan-400">Feb 2017 - Jun 2021</div>
+                                    <div class="text-sm text-gray-400">Completed</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">AI</span>
+                                <span class="badge">ML</span>
+                                <span class="badge">Software</span>
+                                <span class="badge">Systems</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="tektur text-4xl font-bold mb-12 text-center text-white">PROJECTS</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 - VR Rhythm Saber Combat -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/gw3.png?raw=true" alt="VR Rhythm Saber Combat" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>⚔️</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR RHYTHM SABER COMBAT</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Godot</span>
+                        <span class="badge">Hand Therapy</span>
+                        <span class="badge">Rehabilitation</span>
+                        <span class="badge">Music-Driven</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Turning hand therapy into an exciting music-driven VR game. Players slice the cubes flying toward them and practice sensory coordination by processing the visual cue and timing their sword swings, which helps improve range of motion (ROM), fine motor skills, and hand-eye coordination as part of upper limb rehabilitation.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <button class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 2 - Accessible VR Locomotion -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/gw3.png?raw=true" alt="Accessible VR Locomotion" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>♿</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">ACCESSIBLE VR LOCOMOTION</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Godot</span>
+                        <span class="badge">Accessibility</span>
+                        <span class="badge">Motor Rehabilitation</span>
+                        <span class="badge">Therapeutic</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">By combining hand-based forward and backward movement with head-angled direction, this application creates an intuitive locomotion technique that mirrors the natural hand motions wheelchair users employ to propel themselves. In addition to enhancing accessibility in virtual environments, it also provides therapeutic exercises for motor rehabilitation, neck therapy, and spinal health.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <button class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 3 - Bimanual VR Manipulation -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/gw3.png?raw=true" alt="Bimanual VR Manipulation" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🤏</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">BIMANUAL VR MANIPULATION</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Godot</span>
+                        <span class="badge">Dual Hand Interaction</span>
+                        <span class="badge">Educational</span>
+                        <span class="badge">Therapeutic</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Users manipulate objects with both hands, scaling and repositioning them in real time. This system supports educational and engineering tasks like engine part inspection while promoting therapeutic practice for improving hand and motor function.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <button class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 4 - VR Climbing -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/vrclimb.jpg?raw=true" alt="VR Climbing" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🧗‍♂️</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR CLIMBING</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Unreal Engine</span>
+                        <span class="badge">Rehabilitation</span>
+                        <span class="badge">Height Phobia</span>
+                        <span class="badge">Therapy</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">By replicating natural two-handed climbing interactions, this VR application provides repetitive exercises for hand and upper-body rehabilitation. At the same time, it serves as an exposure-based training tool for overcoming height phobia.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <a href="https://www.behance.net/gallery/183357879/VR-CLIMBING" target="_blank" class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            Behance
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=rwYDdCRlKCE" target="_blank" class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 5 - Slicing in VR -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/vr%20slicing.jpg?raw=true" alt="Slicing in VR" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🔪</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SLICING IN VR</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Unreal Engine</span>
+                        <span class="badge">Object Interaction</span>
+                        <span class="badge">Physics</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Exploring a VR slicing interaction project with Unreal Engine, emphasizing advanced object interaction and physics.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <a href="https://www.youtube.com/watch?v=0rsNQhLoc88" target="_blank" class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 6 - Shooting in VR -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/vr%20shooting.jpg?raw=true" alt="Shooting in VR" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🎯</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SHOOTING IN VR</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Unreal Engine</span>
+                        <span class="badge">Hit Detection</span>
+                        <span class="badge">Immersive</span>
+                        <span class="badge">Mechanics</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Built in Unreal Engine, this project explores immersive shooting mechanics with real-time hit detection.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <a href="https://www.youtube.com/watch?v=doI7oWqkkTw" target="_blank" class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 7 - VR Breathing Therapy -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/vr%20breathing.png?raw=true" alt="VR Breathing Therapy" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🧘‍♂️</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR BREATHING THERAPY</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Unreal Engine</span>
+                        <span class="badge">Mindfulness</span>
+                        <span class="badge">Therapeutic</span>
+                        <span class="badge">Mental Well-being</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Users practice structured breathing patterns in a soothing VR space designed with visual and auditory relaxation cues. This VR application uses mindfulness training with therapeutic breathing techniques to improve mental well-being and reduce anxiety.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <a href="https://www.youtube.com/watch?v=xWGP84gCquY&t=25s" target="_blank" class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 8 - Healthy Eating Trainer -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/virtual%20eating%20habit.jpg?raw=true" alt="Healthy Eating Trainer" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🍎</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">HEALTHY EATING TRAINER</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Python</span>
+                        <span class="badge">Face Tracking</span>
+                        <span class="badge">Educational</span>
+                        <span class="badge">HCI</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Developed a child-centric educational game in Python, highlighting healthy eating and HCI principles, powered by innovative face-tracking mechanics.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <a href="https://www.youtube.com/watch?v=Zb_mTyWeHYc" target="_blank" class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 9 - Virtual Painting -->
+                <div class="hud-card p-6">
+                    <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/virtual%20painting.jpg?raw=true" alt="Virtual Painting" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🎨</span>';">
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VIRTUAL PAINTING</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Python</span>
+                        <span class="badge">AI</span>
+                        <span class="badge">HCI</span>
+                        <span class="badge">Computer Vision</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Developed a virtual painting app using Python, merging AI with HCI via advanced hand tracking and computer vision.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <a href="https://www.youtube.com/watch?v=vHOl_k28R18" target="_blank" class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teaching Section -->
+    <section id="teaching" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="tektur text-4xl font-bold mb-12 text-center text-white">EXPERIENCE</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Timeline Container -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 via-cyan-400 to-transparent"></div>
+                    
+                    <!-- Research Assistant - Current -->
+                    <div class="relative mb-12">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-6 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-900 shadow-lg shadow-cyan-400/50"></div>
+                        
+                        <!-- Content Card -->
+                        <div class="ml-20 hud-card p-6">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">RESEARCH ASSISTANT</h3>
+                                    <p class="text-lg font-semibold">HEX Lab, UW-Milwaukee</p>
+                                    <p class="text-gray-400">Wisconsin, USA</p>
+                                </div>
+                                <div class="text-right mt-4 md:mt-0">
+                                    <div class="tektur font-bold text-cyan-400">Aug 2024 - Present</div>
+                                    <div class="text-sm text-gray-400">Current</div>
+                                </div>
+                            </div>
+                            
+                            <ul class="text-sm space-y-1 mb-4">
+                                <li>• VR locomotion research</li>
+                                <li>• Data analysis and visualization</li>
+                                <li>• Research paper writing</li>
+                            </ul>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">VR Research</span>
+                                <span class="badge">Data Analysis</span>
+                                <span class="badge">Academic Writing</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Teaching Assistant -->
+                    <div class="relative mb-12">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-6 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-900 shadow-lg shadow-cyan-400/50"></div>
+                        
+                        <!-- Content Card -->
+                        <div class="ml-20 hud-card p-6">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">TEACHING ASSISTANT</h3>
+                                    <p class="text-lg font-semibold">University of Wisconsin-Milwaukee</p>
+                                    <p class="text-gray-400">Wisconsin, USA</p>
+                                </div>
+                                <div class="text-right mt-4 md:mt-0">
+                                    <div class="tektur font-bold text-cyan-400">Aug 2024 - Present</div>
+                                    <div class="text-sm text-gray-400">Current</div>
+                                </div>
+                            </div>
+                            
+                            <ul class="text-sm space-y-1 mb-4">
+                                <li>• Course instruction and grading</li>
+                                <li>• Student mentoring</li>
+                                <li>• Lab supervision</li>
+                            </ul>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">Teaching</span>
+                                <span class="badge">Mentoring</span>
+                                <span class="badge">Lab Management</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Research Assistant - Previous -->
+                    <div class="relative">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-6 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-900 shadow-lg shadow-cyan-400/50"></div>
+                        
+                        <!-- Content Card -->
+                        <div class="ml-20 hud-card p-6">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">RESEARCH ASSISTANT</h3>
+                                    <p class="text-lg font-semibold">AML Lab Dhaka</p>
+                                    <p class="text-gray-400">Dhaka, Bangladesh</p>
+                                </div>
+                                <div class="text-right mt-4 md:mt-0">
+                                    <div class="tektur font-bold text-cyan-400">Sep 2020 - Jan 2022</div>
+                                    <div class="text-sm text-gray-400">Completed</div>
+                                </div>
+                            </div>
+                            
+                            <ul class="text-sm space-y-1 mb-4">
+                                <li>• Computer vision research</li>
+                                <li>• Machine learning model development</li>
+                                <li>• Publication writing</li>
+                            </ul>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">Computer Vision</span>
+                                <span class="badge">Machine Learning</span>
+                                <span class="badge">Research</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEXLab Section -->
+    <section id="lab" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="tektur text-4xl font-bold mb-12 text-center text-white">HEXLAB</h2>
+            
+            <!-- Lab Overview -->
+            <div class="hud-card p-8 mb-8 max-w-4xl mx-auto">
+                <div class="flex flex-col lg:flex-row items-start gap-8">
+                    <!-- Lab Logo -->
+                    <div class="w-40 h-40 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <img src="https://github.com/nahid-uwm/image/blob/main/Hex%20Lab/hex%20lab%20icon%202.png?raw=true" alt="HEXLab Logo" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-6xl\'>🔬</span>';">
+                    </div>
+                    
+                    <!-- Lab Info -->
+                    <div class="flex-1">
+                        <h3 class="tektur text-2xl font-bold text-cyan-400 mb-4">HUMAN EXPERIENCE IN XR</h3>
+                        <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                            Focusing on understanding and improving human-computer interaction through immersive technologies.
+                        </p>
+                        
+                        <!-- Lab Stats -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div class="text-center">
+                                <div class="tektur text-2xl font-bold text-cyan-400">4+</div>
+                                <div class="text-sm text-gray-400">Active Projects</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="tektur text-2xl font-bold text-cyan-400">1+</div>
+                                <div class="text-sm text-gray-400">Publications</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="tektur text-2xl font-bold text-cyan-400">6</div>
+                                <div class="text-sm text-gray-400">Team Members</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="tektur text-2xl font-bold text-cyan-400">3</div>
+                                <div class="text-sm text-gray-400">Years Active</div>
+                            </div>
+                        </div>
+
+                        <a href="https://sites.uwm.edu/hex/" target="_blank" class="hud-button">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            Visit Lab Website
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="tektur text-4xl font-bold mb-12 text-center text-white">CONTACT</h2>
+            
+            <div class="flex justify-center">
+                <!-- Contact Info -->
+                <div class="hud-card p-8 max-w-2xl w-full">
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-5 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 94 60" fill="none">
+                                    <path d="M44.0554 0.281555H39.7092L32.5954 23.9939L25.3 0.281555H23.5061H20.9538H19.6169V20.8662C19.6169 23.9585 16.6292 26.3554 12.2984 26.3554C7.96767 26.3554 4.97844 24.0846 4.97844 20.8662V0.281555H1.09229V20.18C1.09229 26.02 5.20921 30.0154 12.3 30.0154C19.3907 30.0154 23.5077 25.9754 23.5077 20.18V8.18002L30.5615 30.0139H34.6784L41.883 6.59848L48.5492 28.2616L49.9169 19.8154L44.0554 0.281555Z" fill="white"/>
+                                    <path d="M52.4754 30.1662L57.3123 0.289246H68.4646L71.9585 12.5169C72.4062 14.0846 72.5846 15.5631 72.6308 15.9662H72.9C72.9446 14.6677 73.1231 13.7708 73.4816 12.5169L76.9754 0.289246H88.0385L92.92 30.1646H82.4846L81.1416 16.7723C81.0523 15.7431 80.9616 15.0708 80.9616 13.8169H80.7816C80.6477 14.5785 80.3785 15.7431 80.1985 16.3262L75.7646 30.1662H69.4046L65.4185 17.0877C65.1046 16.0123 64.8816 15.0723 64.8369 13.8185H64.5231C64.5231 14.4 64.5231 15.5646 64.4785 16.1477L63 30.1677H52.4754V30.1662Z" fill="white"/>
+                                    <path d="M49.1154 42.74L49.2077 42.4661C50.4662 38.7677 49.4154 37.5385 45.7046 37.5385H1.10309V44.1908L46.2554 42.5461C47.9908 42.4661 49.0354 42.9708 48.3462 44.8538C48.3462 44.8538 48.0708 45.6585 47.8862 46.1754C47.8646 46.2338 47.8539 46.2938 47.8431 46.3523C47.8246 46.4 47.5431 47.1861 48.3815 47.8892C49.4862 48.8138 59.8831 48.9954 65.7015 48.4323C69.1908 48.1769 72.7739 47.74 76.4046 47.2077C81.8539 46.4108 87.4446 45.5661 92.9385 44.8708V38.6661C78.1369 41.0385 62.9339 44.1985 49.1154 42.74Z" fill="#FFBD00"/>
+                                    <path d="M73.8231 52.7892C73.8231 52.7892 73.7569 52.7969 73.6631 52.8061C72.8231 52.8923 68.6185 53.3246 67.7492 53.4138C67.6492 53.4246 67.5785 53.4308 67.5785 53.4308C61.5985 54.0708 47.9108 54.2846 46.5431 52.9861C46.1031 52.5692 46.0446 51.9723 46.08 51.5077C46.0662 51.2108 46.1169 50.8923 46.2554 50.5631L46.9446 48.9323C47.1754 48.2892 46.6815 47.6461 46.0031 47.68L1.10309 49.7323V56.2554L45.1862 52.6292C45.1185 52.8246 45.0708 52.9615 45.0492 53.0415C44.8739 53.5323 44.7539 53.9723 44.6815 54.3769C44.6815 54.3769 43.8631 56.6415 44.9139 57.8277C47.1846 60.3877 64.4139 59.2538 69.5477 58.9938C69.8785 58.98 70.2092 58.9677 70.5385 58.9508C70.5723 58.9492 70.6139 58.9477 70.6446 58.9477C70.6615 58.9477 70.6615 58.9446 70.6754 58.9446C78.2569 58.5723 85.6908 57.7231 92.94 57.1061V50.1661C86.6185 51.0046 80.1708 52.0354 73.7631 52.7954C73.78 52.7938 73.8077 52.7908 73.8231 52.7892Z" fill="#FFBD00"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-bold">University of Wisconsin Milwaukee</div>
+                                <div class="text-sm text-gray-400">Computer Science Department</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-5 h-5 flex-shrink-0">
+                                <svg enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-cyan-400">
+                                    <path d="m12 0c-4.962 0-9 4.066-9 9.065 0 7.103 8.154 14.437 8.501 14.745.143.127.321.19.499.19s.356-.063.499-.189c.347-.309 8.501-7.643 8.501-14.746 0-4.999-4.038-9.065-9-9.065zm0 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path>
+                                </svg>
+                            </div>
+                            <span>Milwaukee, Wisconsin, USA</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-5 h-5 flex-shrink-0">
+                                <svg enable-background="new 0 0 100 100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="text-cyan-400">
+                                    <path d="m45.7953949 57.5565643-43.1575694-31.3894138c-.0835295.0425339-.0542982.0276489-.1378276.0701828v47.5c0 5.2467041 4.2532949 9.5 9.5 9.5h76c5.2467041 0 9.5-4.2532959 9.5-9.5v-47.6137638c-.0153503-.0078182-.0099869-.0050869-.0253372-.012907l-43.2689913 31.4473705c-2.5074387 1.8223762-5.9034691 1.821785-8.4102745-.0014687z"></path>
+                                    <path d="m54.205761 45.826828 38.328907-27.8734989c-1.3426667-.7346668-2.8880005-1.1906662-4.534668-1.1906662h-76c-1.6466665 0-3.166667.4560013-4.534667 1.1906662l38.328906 27.8734989c2.5073853 1.8234177 5.9041367 1.8234177 8.411522 0z"></path>
+                                </svg>
+                            </div>
+                            <span>hasan26@uwm.edu</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-5 h-5 flex-shrink-0">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 510 510" xml:space="preserve" fill="currentColor" class="text-cyan-400">
+                                    <path d="M459,0H51C22.95,0,0,22.95,0,51v408c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51V51C510,22.95,487.05,0,459,0z M153,433.5H76.5V204H153V433.5z M114.75,160.65c-25.5,0-45.9-20.4-45.9-45.9s20.4-45.9,45.9-45.9s45.9,20.4,45.9,45.9 S140.25,160.65,114.75,160.65z M433.5,433.5H357V298.35c0-20.399-17.85-38.25-38.25-38.25s-38.25,17.851-38.25,38.25V433.5H204 V204h76.5v30.6c12.75-20.4,40.8-35.7,63.75-35.7c48.45,0,89.25,40.8,89.25,89.25V433.5z"></path>
+                                </svg>
+                            </div>
+                            <a href="https://www.linkedin.com/in/zanahid/" target="_blank" class="text-cyan-400 hover:text-cyan-300">linkedin.com/in/zanahid</a>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-5 h-5 flex-shrink-0">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 438.536 438.536" xml:space="preserve" fill="currentColor" class="text-cyan-400">
+                                    <path d="M158.173,352.599c-3.049,0.568-4.381,1.999-3.999,4.281c0.38,2.283,2.093,3.046,5.138,2.283c3.049-0.76,4.38-2.095,3.997-3.997C162.931,353.074,161.218,352.216,158.173,352.599z"></path>
+                                    <path d="M141.898,354.885c-3.046,0-4.568,1.041-4.568,3.139c0,2.474,1.619,3.518,4.853,3.138c3.046,0,4.57-1.047,4.57-3.138C146.753,355.553,145.134,354.502,141.898,354.885z"></path>
+                                    <path d="M119.629,354.022c-0.76,2.095,0.478,3.519,3.711,4.284c2.855,1.137,4.664,0.568,5.424-1.714c0.572-2.091-0.666-3.61-3.711-4.568C122.197,351.265,120.39,351.922,119.629,354.022z"></path>
+                                    <path d="M414.41,24.123C398.326,8.042,378.964,0,356.309,0H82.225C59.577,0,40.208,8.042,24.123,24.123C8.042,40.207,0,59.576,0,82.225v274.088c0,22.65,8.042,42.017,24.123,58.098c16.084,16.084,35.454,24.126,58.102,24.126h63.953c4.184,0,7.327-0.144,9.42-0.424c2.092-0.288,4.184-1.526,6.279-3.717c2.096-2.187,3.14-5.376,3.14-9.562c0-0.568-0.05-7.046-0.144-19.417c-0.097-12.375-0.144-22.176-0.144-29.41l-6.567,1.143c-4.187,0.76-9.469,1.095-15.846,0.999c-6.374-0.096-12.99-0.76-19.841-1.998c-6.855-1.239-13.229-4.093-19.13-8.562c-5.898-4.477-10.085-10.328-12.56-17.559l-2.856-6.571c-1.903-4.373-4.899-9.229-8.992-14.554c-4.093-5.332-8.232-8.949-12.419-10.852l-1.999-1.428c-1.331-0.951-2.568-2.098-3.711-3.429c-1.141-1.335-1.997-2.669-2.568-3.997c-0.571-1.335-0.097-2.43,1.427-3.289c1.524-0.855,4.281-1.279,8.28-1.279l5.708,0.855c3.808,0.76,8.516,3.042,14.134,6.851c5.614,3.806,10.229,8.754,13.846,14.843c4.38,7.806,9.657,13.75,15.846,17.843c6.184,4.097,12.419,6.143,18.699,6.143s11.704-0.476,16.274-1.424c4.565-0.954,8.848-2.385,12.847-4.288c1.713-12.751,6.377-22.559,13.988-29.41c-10.848-1.143-20.602-2.854-29.265-5.14c-8.658-2.286-17.605-5.995-26.835-11.136c-9.234-5.14-16.894-11.512-22.985-19.13c-6.09-7.618-11.088-17.61-14.987-29.978c-3.901-12.375-5.852-26.652-5.852-42.829c0-23.029,7.521-42.637,22.557-58.814c-7.044-17.32-6.379-36.732,1.997-58.242c5.52-1.714,13.706-0.428,24.554,3.855c10.85,4.286,18.794,7.951,23.84,10.992c5.046,3.042,9.089,5.614,12.135,7.71c17.705-4.949,35.976-7.423,54.818-7.423c18.841,0,37.115,2.474,54.821,7.423l10.849-6.852c7.426-4.57,16.18-8.757,26.269-12.562c10.088-3.806,17.795-4.854,23.127-3.14c8.562,21.51,9.328,40.922,2.279,58.241c15.036,16.179,22.559,35.786,22.559,58.815c0,16.18-1.951,30.505-5.852,42.969c-3.898,12.467-8.939,22.463-15.13,29.981c-6.184,7.519-13.894,13.843-23.124,18.986c-9.232,5.137-18.178,8.853-26.84,11.132c-8.661,2.286-18.414,4.004-29.263,5.147c9.891,8.562,14.839,22.072,14.839,40.538v68.238c0,3.237,0.472,5.852,1.424,7.851c0.958,1.998,2.478,3.374,4.571,4.141c2.102,0.76,3.949,1.235,5.571,1.424c1.622,0.191,3.949,0.287,6.995,0.287h63.953c22.648,0,42.018-8.042,58.095-24.126c16.084-16.084,24.126-35.454,24.126-58.102V82.225C438.533,59.576,430.491,40.204,414.41,24.123z"></path>
+                                    <path d="M86.793,319.195c-1.331,0.948-1.141,2.471,0.572,4.565c1.906,1.902,3.427,2.189,4.57,0.855c1.331-0.948,1.141-2.471-0.575-4.569C89.458,318.336,87.936,318.049,86.793,319.195z"></path>
+                                    <path d="M77.374,312.057c-0.57,1.335,0.096,2.478,1.999,3.426c1.521,0.955,2.762,0.767,3.711-0.568c0.57-1.335-0.096-2.478-1.999-3.433C79.182,310.91,77.945,311.102,77.374,312.057z"></path>
+                                    <path d="M95.646,330.331c-1.715,0.948-1.715,2.666,0,5.137c1.713,2.478,3.328,3.142,4.853,1.998c1.714-1.334,1.714-3.142,0-5.427C98.978,329.571,97.359,328.993,95.646,330.331z"></path>
+                                    <path d="M105.641,343.174c-1.714,1.526-1.336,3.327,1.142,5.428c2.281,2.279,4.185,2.566,5.708,0.849c1.524-1.519,1.143-3.326-1.142-5.42C109.068,341.751,107.164,341.463,105.641,343.174z"></path>
+                                </svg>
+                            </div>
+                            <a href="https://github.com/nahid-uwm" target="_blank" class="text-cyan-400 hover:text-cyan-300">github.com/nahid-uwm</a>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-5 h-5 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 256 256" xml:space="preserve" width="100%" height="100%" fill="currentColor" class="text-cyan-400">
+                                    <path d="M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z"/>
+                                    <g>
+                                        <path fill="white" d="M86.3,186.2H70.9V79.1h15.4v48.4V186.2z"/>
+                                        <path fill="white" d="M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5   c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z"/>
+                                        <path fill="white" d="M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1   C84.2,46.7,88.7,51.3,88.7,56.8z"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <a href="https://orcid.org/0000-0002-1825-0097" target="_blank" class="text-cyan-400 hover:text-cyan-300">orcid.org/0000-0002-1825-0097</a>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-5 h-5 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" fill="currentColor" class="text-cyan-400">
+                                    <path d="M256 411.12L0 202.667 256 0z"/>
+                                    <path d="M256 411.12l256-208.453L256 0z"/>
+                                    <circle cx="256" cy="362.667" r="149.333"/>
+                                    <path d="M121.037 298.667c23.968-50.453 75.392-85.334 134.963-85.334s110.995 34.881 134.963 85.334H121.037z"/>
+                                </svg>
+                            </div>
+                            <a href="https://scholar.google.com/citations?user=xQR0_1QAAAAJ&hl" target="_blank" class="text-cyan-400 hover:text-cyan-300">Google Scholar Profile</a>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <button class="hud-button w-full" id="downloadCV2">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            CV (PDF)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // Custom Cursor - Instant Real-time Movement
+        const cursor = document.querySelector('.custom-cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            // Use transform for hardware acceleration and instant updates
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+
+        // Cursor hover effects
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.matches('button, a, .gear-item')) {
+                cursor.classList.add('cursor-hover');
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.matches('button, a, .gear-item')) {
+                cursor.classList.remove('cursor-hover');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('cursor-click');
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('cursor-click');
+        });
+
+        // Starfield
+        function createStarfield() {
+            const starfield = document.getElementById('starfield');
+            const numStars = 100;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starfield.appendChild(star);
+            }
+        }
+
+        // Mobile Menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleMobileMenu() {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            mobileOverlay.classList.toggle('open');
+            
+            // Prevent body scroll when menu is open
+            if (mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking overlay
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when clicking links
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Progress dots
+        const progressDots = document.querySelectorAll('.progress-dot');
+        const sections = document.querySelectorAll('section[id]');
+
+        progressDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const sectionId = dot.dataset.section;
+                scrollToSection(sectionId);
+            });
+        });
+
+        // Update active progress dot on scroll
+        function updateProgressDots() {
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    progressDots.forEach(dot => dot.classList.remove('active'));
+                    progressDots[index]?.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateProgressDots);
+
+        // Tooltips
+        const tooltip = document.getElementById('tooltip');
+        const gearItems = document.querySelectorAll('.gear-item');
+
+        gearItems.forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                const tooltipText = item.dataset.tooltip;
+                tooltip.textContent = tooltipText;
+                tooltip.classList.add('show');
+                
+                const rect = item.getBoundingClientRect();
+                tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+                tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + 'px';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('show');
+            });
+        });
+
+ 
+
+        // Download CV buttons
+        function setupDownloadButton(btnId) {
+            const btn = document.getElementById(btnId);
+            
+            btn.addEventListener('click', () => {
+                // Create and download placeholder PDF
+                const link = document.createElement('a');
+                link.href = 'data:application/pdf;base64,JVBERi0xLjMKJcTl8uXrp/Og0MTGCjQgMCBvYmoKPDwKL1R5cGUgL0NhdGFsb2cKL091dGxpbmVzIDIgMCBSCi9QYWdlcyAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovVHlwZSAvT3V0bGluZXMKL0NvdW50IDAKPD4KZW5kb2JqCjMgMCBvYmoKPDwKL1R5cGUgL1BhZ2VzCi9Db3VudCAxCi9LaWRzIFs0IDAgUl0KPj4KZW5kb2JqCjQgMCBvYmoKPDwKL1R5cGUgL1BhZ2UKL1BhcmVudCAzIDAgUgovUmVzb3VyY2VzIDw8Ci9Gb250IDw8Ci9GMSA5IDAgUgo+Pgo+PgovTWVkaWFCb3ggWzAgMCA2MTIgNzkyXQovQ29udGVudHMgNSAwIFIKPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA0NAo+PgpzdHJlYW0KQlQKL0YxIDEyIFRmCjcyIDcyMCBUZAooTUQgTkFISUQgSEFTQU4gLSBDVikgVGoKRVQKZW5kc3RyZWFtCmVuZG9iago2IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovTmFtZSAvRjEKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcKPj4KZW5kb2JqCnhyZWYKMCA3CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDc0IDAwMDAwIG4gCjAwMDAwMDAxMjAgMDAwMDAgbiAKMDAwMDAwMDE3NyAwMDAwMCBuIAowMDAwMDAwMzY0IDAwMDAwIG4gCjAwMDAwMDA0NTggMDAwMDAgbiAKdHJhaWxlcgo8PAovU2l6ZSA3Ci9Sb290IDEgMCBSCj4+CnN0YXJ0eHJlZgo1NjUKJSVFT0Y=';
+                link.download = 'MD_Nahid_Hasan_CV.pdf';
+                link.click();
+            });
+        }
+
+        // Setup both download buttons
+        setupDownloadButton('downloadCV');
+        setupDownloadButton('downloadCV2');
+
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Message sent! (This is a demo - EmailJS integration would handle actual sending)');
+        });
+
+        // Navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Initialize
+        createStarfield();
+        updateProgressDots();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97915abae52ce203',t:'MTc1Njg2MTY5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
