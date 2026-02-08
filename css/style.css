@@ -571,19 +571,33 @@ body {
 
     /* Extra small screens */
     .container.mx-auto {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 
     .max-w-7xl {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    
+    /* Header spacing */
+    header {
+        padding-top: 15px;
     }
 
     /* Hero title */
     h1.tektur {
-        font-size: 2rem;
+        font-size: 1.75rem;
         line-height: 1.2;
+    }
+    
+    /* Stats grid */
+    .grid.grid-cols-2.md\:grid-cols-4 {
+        gap: 0.75rem;
+    }
+    
+    .grid.grid-cols-2.md\:grid-cols-4 > div > div:first-child {
+        font-size: 1.5rem; /* Make stat numbers slightly smaller */
     }
 
     /* Timeline further adjustments */
@@ -610,6 +624,16 @@ body {
         font-size: 0.7rem;
         padding: 6px 12px;
         min-height: 36px;
+    }
+    
+    /* Projects */
+    .project-card h3 {
+        font-size: 1.25rem;
+    }
+    
+    /* About Me text spacing */
+    #about .grid > div:first-child {
+        margin-bottom: 2rem;
     }
 }
 
