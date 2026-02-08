@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD NAHID HASAN - VR Research Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -171,9 +171,8 @@
             <div class="flex justify-center">
                 <div class="hud-card w-80 h-96 overflow-hidden">
                     <!-- img src="https://github.com/nahid-uwm/image/blob/main/Nahid%20Photo/nahid.jpg?raw=true" -->
-                    <img src="D:\Research Work\GITHUB\nahid\image\nahid_photo\nahid.jpg" alt="MD Nahid Hasan"
-                        class="w-full h-full object-cover"
-                        onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<div class=\'text-6xl p-8 flex items-center justify-center\'>👨‍💻</div>';">
+                    <img src="image/nahid_photo/nahid.jpg" alt="MD Nahid Hasan" class="w-full h-full object-cover"
+                        onerror="this.parentElement.innerHTML='<div class=\'text-6xl p-8 flex items-center justify-center\'>👨‍💻</div>';">
                 </div>
             </div>
         </div>
@@ -325,9 +324,9 @@
                 <div class="hud-card p-6">
                     <div
                         class="aspect-[3/2] bg-gradient-to-br from-cyan-900 to-blue-900 rounded mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/gw3.png?raw=true"
+                        <img src="image/research/EVALUATION OF GUIDED WALKING SPEED TECHNIQUES IN VIRTUAL REALITY.png"
                             alt="Evaluation of Guided Walking Speed Techniques in VR" class="w-full h-full object-cover"
-                            onerror="this.remove(); this.parentElement.innerHTML='<span class=&quot;text-4xl&quot;>🚶‍♂️</span>';" />
+                            onerror="this.parentElement.innerHTML='<span class=&quot;text-4xl&quot;>🚶‍♂️</span>';" />
                     </div>
 
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">EVALUATION OF GUIDED WALKING SPEED
@@ -360,8 +359,10 @@
                 <!-- Research 2 - Driver Blind Spots -->
                 <div class="hud-card p-6">
                     <div
-                        class="aspect-[3/2] bg-gradient-to-br from-blue-900 to-purple-900 rounded mb-4 flex items-center justify-center">
-                        <span class="text-4xl">🚛</span>
+                        class="aspect-[3/2] bg-gradient-to-br from-blue-900 to-purple-900 rounded mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="image/research/SIMULATING DRIVER BLIND SPOTS WITH VR_ IMPLICATIONS FOR PEDESTRIAN SAFETY.png"
+                            alt="Simulating Driver Blind Spots with VR" class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=&quot;text-4xl&quot;>🚛</span>';" />
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SIMULATING DRIVER BLIND SPOTS WITH VR:
                         IMPLICATIONS FOR PEDESTRIAN SAFETY</h3>
@@ -389,6 +390,46 @@
                             <div class="decorator bottom right"></div>
                             Video
                         </button>
+                    </div>
+                </div>
+
+                <!-- Research 3 - Shore Defender -->
+                <div class="hud-card p-6">
+                    <div
+                        class="aspect-[3/2] bg-transparent rounded mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="image/research/Shore Defender.png" alt="Shore Defender"
+                            class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=&quot;text-4xl&quot;>🌊</span>';" />
+                    </div>
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SHORE DEFENDER: A VR EDUTAINMENT GAME FOR
+                        OCEAN CONSERVATION</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">PUBLISHED</span>
+                        <span class="badge">VR Edutainment</span>
+                        <span class="badge">Conservation</span>
+                        <span class="badge">Multiplayer</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Multiplayer virtual reality edutainment game designed to raise public
+                        awareness about
+                        ocean conservation and plastic recycling through novel interaction techniques and immersive
+                        gameplay experiences.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <a href="https://ieeexplore.ieee.org/abstract/document/10972693" target="_blank"
+                            class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            Open Dossier
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=DsBCUvweIU0" target="_blank"
+                            class="hud-button text-xs">
+                            <div class="decorator top left"></div>
+                            <div class="decorator top right"></div>
+                            <div class="decorator bottom left"></div>
+                            <div class="decorator bottom right"></div>
+                            Video
+                        </a>
                     </div>
                 </div>
             </div>
@@ -501,6 +542,61 @@
                 <!-- Scroll Container -->
                 <div id="videoContainer"
                     class="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory py-12 px-4 scroll-smooth">
+                    <!-- Video 01: Setting up XR -->
+                    <div
+                        class="min-w-[100%] md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
+                        <div class="aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
+                            onclick="loadVideo(this, 'Dodl2BjuKtI')">
+                            <img src="https://img.youtube.com/vi/Dodl2BjuKtI/hqdefault.jpg" alt="Video Thumbnail"
+                                class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="tektur text-lg font-bold text-cyan-400 mb-2">01 Setting up XR — Godot Engine</h3>
+                        <p class="text-sm text-gray-300">Setting up XR in Godot Engine.</p>
+                        <div class="mt-4">
+                            <a href="https://www.youtube.com/watch?v=Dodl2BjuKtI" target="_blank"
+                                class="hud-button text-xs w-full">
+                                <div class="decorator top left"></div>
+                                <div class="decorator top right"></div>
+                                <div class="decorator bottom left"></div>
+                                <div class="decorator bottom right"></div>
+                                Watch
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Video 02: Distance-Based Grabbing -->
+                    <div
+                        class="min-w-[100%] md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
+                        <div class="aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
+                            onclick="loadVideo(this, 'PnYMR95N344')">
+                            <img src="https://img.youtube.com/vi/PnYMR95N344/hqdefault.jpg" alt="Video Thumbnail"
+                                class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="tektur text-lg font-bold text-cyan-400 mb-2">02 Distance-Based Grabbing in VR</h3>
+                        <p class="text-sm text-gray-300">Implement distance grabbing in Godot VR.</p>
+                        <div class="mt-4">
+                            <a href="https://www.youtube.com/watch?v=PnYMR95N344" target="_blank"
+                                class="hud-button text-xs w-full">
+                                <div class="decorator top left"></div>
+                                <div class="decorator top right"></div>
+                                <div class="decorator bottom left"></div>
+                                <div class="decorator bottom right"></div>
+                                Watch
+                            </a>
+                        </div>
+                    </div>
                     <!-- Video 1 -->
                     <div
                         class="min-w-[100%] md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
@@ -782,9 +878,9 @@
                 <!-- Project 1 - VR Rhythm Saber Combat -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/gw3.png?raw=true"
-                            alt="VR Rhythm Saber Combat" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>⚔️</span>';">
+                        <img src="image/projects/VR RHYTHM SABER COMBAT.png" alt="VR Rhythm Saber Combat"
+                            class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>⚔️</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR RHYTHM SABER COMBAT</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -811,9 +907,9 @@
                 <!-- Project 2 - Accessible VR Locomotion -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/gw3.png?raw=true"
-                            alt="Accessible VR Locomotion" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>♿</span>';">
+                        <img src="image/projects/ACCESSIBLE VR LOCOMOTION.png" alt="Accessible VR Locomotion"
+                            class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>♿</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">ACCESSIBLE VR LOCOMOTION</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -841,9 +937,9 @@
                 <!-- Project 3 - Bimanual VR Manipulation -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/gw3.png?raw=true"
-                            alt="Bimanual VR Manipulation" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🤏</span>';">
+                        <img src="image/projects/BIMANUAL VR MANIPULATION.png" alt="Bimanual VR Manipulation"
+                            class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🤏</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">BIMANUAL VR MANIPULATION</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -869,9 +965,8 @@
                 <!-- Project 4 - VR Climbing -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/vrclimb.jpg?raw=true"
-                            alt="VR Climbing" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🧗‍♂️</span>';">
+                        <img src="image/projects/vrclimb.jpg" alt="VR Climbing" class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🧗‍♂️</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR CLIMBING</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -906,9 +1001,8 @@
                 <!-- Project 5 - Slicing in VR -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/vr%20slicing.jpg?raw=true"
-                            alt="Slicing in VR" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🔪</span>';">
+                        <img src="image/projects/vr slicing.jpg" alt="Slicing in VR" class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🔪</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SLICING IN VR</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -933,9 +1027,9 @@
                 <!-- Project 6 - Shooting in VR -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/vr%20shooting.jpg?raw=true"
-                            alt="Shooting in VR" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🎯</span>';">
+                        <img src="image/projects/vr shooting.jpg" alt="Shooting in VR"
+                            class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🎯</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SHOOTING IN VR</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -961,9 +1055,9 @@
                 <!-- Project 7 - VR Breathing Therapy -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/vr%20breathing.png?raw=true"
-                            alt="VR Breathing Therapy" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🧘‍♂️</span>';">
+                        <img src="image/projects/vr breathing.png" alt="VR Breathing Therapy"
+                            class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🧘‍♂️</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR BREATHING THERAPY</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -990,9 +1084,9 @@
                 <!-- Project 8 - Healthy Eating Trainer -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/virtual%20eating%20habit.jpg?raw=true"
-                            alt="Healthy Eating Trainer" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🍎</span>';">
+                        <img src="image/projects/virtual eating habit.jpg" alt="Healthy Eating Trainer"
+                            class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🍎</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">HEALTHY EATING TRAINER</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -1018,9 +1112,9 @@
                 <!-- Project 9 - Virtual Painting -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://github.com/nahid-uwm/image/blob/main/Personal%20Projects/virtual%20painting.jpg?raw=true"
-                            alt="Virtual Painting" class="w-full h-full object-cover"
-                            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🎨</span>';">
+                        <img src="image/projects/virtual painting.jpg" alt="Virtual Painting"
+                            class="w-full h-full object-cover"
+                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🎨</span>';">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VIRTUAL PAINTING</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -1384,7 +1478,7 @@
     <div class="tooltip" id="tooltip"></div>
 
     <script src="js/script.js"></script>
-    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'97915abae52ce203',t:'MTc1Njg2MTY5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+
 </body>
 
 </html>
