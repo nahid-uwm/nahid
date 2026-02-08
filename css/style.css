@@ -508,7 +508,8 @@ body {
 
     /* Cards and sections */
     .hud-card {
-        margin: 0 10px;
+        margin: 0 0px;
+        /* was 0 10px */
     }
 
     /* Stats grid */
@@ -579,7 +580,7 @@ body {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
-    
+
     /* Header spacing */
     header {
         padding-top: 15px;
@@ -590,14 +591,15 @@ body {
         font-size: 1.75rem;
         line-height: 1.2;
     }
-    
+
     /* Stats grid */
     .grid.grid-cols-2.md\:grid-cols-4 {
         gap: 0.75rem;
     }
-    
-    .grid.grid-cols-2.md\:grid-cols-4 > div > div:first-child {
-        font-size: 1.5rem; /* Make stat numbers slightly smaller */
+
+    .grid.grid-cols-2.md\:grid-cols-4>div>div:first-child {
+        font-size: 1.5rem;
+        /* Make stat numbers slightly smaller */
     }
 
     /* Timeline further adjustments */
@@ -625,14 +627,14 @@ body {
         padding: 6px 12px;
         min-height: 36px;
     }
-    
+
     /* Projects */
     .project-card h3 {
         font-size: 1.25rem;
     }
-    
+
     /* About Me text spacing */
-    #about .grid > div:first-child {
+    #about .grid>div:first-child {
         margin-bottom: 2rem;
     }
 }
