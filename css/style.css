@@ -109,8 +109,8 @@ body {
     border: 1px solid transparent;
     background-color: var(--accent-primary);
     color: var(--bg-secondary);
-    animation: 0.07s flicker;
-    animation-iteration-count: 2;
+    /* animation: 0.07s flicker;
+    animation-iteration-count: 2; */
     transition: all 0.35s cubic-bezier(0.75, 0, 0.25, 1);
 }
 
@@ -123,8 +123,8 @@ body {
     width: 10px;
     height: 10px;
     border: 1px solid transparent;
-    animation: 0.1s flicker;
-    animation-iteration-count: 3;
+    /* animation: 0.1s flicker;
+    animation-iteration-count: 3; */
     transition: all 0.35s cubic-bezier(0.75, 0, 0.25, 1);
 }
 
@@ -168,7 +168,7 @@ body {
     border-right: 1px solid var(--accent-primary);
 }
 
-@keyframes flicker {
+/* @keyframes flicker {
 
     0%,
     50% {
@@ -179,7 +179,7 @@ body {
     100% {
         opacity: 1;
     }
-}
+} */
 
 .badge {
     background: rgba(0, 255, 255, 0.1);
