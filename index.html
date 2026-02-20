@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD NAHID HASAN - VR Research Portfolio</title>
+    <meta name="description"
+        content="Portfolio of MD NAHID HASAN, an MS CS student at UW-Milwaukee specializing in Virtual Reality (VR), Human-Computer Interaction (HCI), AI/ML, and safety research.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Tektur:wght@400;700;900&display=swap">
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Tektur:wght@400;700;900&display=swap"
         rel="stylesheet">
@@ -57,7 +61,7 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="lg:hidden hamburger" id="hamburger">
+                <div class="lg:hidden hamburger" id="hamburger" role="button" aria-label="Toggle menu" tabindex="0">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -71,21 +75,33 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <div class="flex flex-col space-y-6">
-            <a href="#about" class="text-lg hover:text-cyan-400 transition-colors mobile-link">About</a>
-            <a href="#research" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Research</a>
-            <a href="#publications" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Publications</a>
-            <a href="#education" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Education</a>
-            <a href="#projects" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Projects</a>
-            <a href="#teaching" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Experience</a>
-            <a href="#lab" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Lab</a>
-            <a href="#contact" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Contact</a>
+        <div class="flex flex-col items-center pt-16 h-full relative">
+            <!-- Close Button -->
+            <button id="closeMenuBtn" class="absolute top-2 right-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+                aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="flex flex-col space-y-6 w-full text-center mt-12">
+                <a href="#about" class="text-lg hover:text-cyan-400 transition-colors mobile-link">About</a>
+                <a href="#research" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Research</a>
+                <a href="#publications"
+                    class="text-lg hover:text-cyan-400 transition-colors mobile-link">Publications</a>
+                <a href="#education" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Education</a>
+                <a href="#projects" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Projects</a>
+                <a href="#teaching" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Experience</a>
+                <a href="#lab" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Lab</a>
+                <a href="#contact" class="text-lg hover:text-cyan-400 transition-colors mobile-link">Contact</a>
+            </div>
         </div>
     </div>
 
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center justify-center relative">
-        <div class="text-center z-10">
+        <div class="text-center z-10 px-4 w-full max-w-7xl mx-auto">
             <h1 class="tektur font-bold text-4xl md:text-6xl lg:text-8xl mb-4 text-white glitch"
                 data-text="MD NAHID HASAN">
                 MD NAHID HASAN
@@ -153,8 +169,10 @@
             <div>
                 <p class="text-lg mb-6 leading-relaxed">
                     Throughout my life, I've been fascinated by design and technology that make life easier and more
-                    enjoyable. From the bumpy yellow dots on sidewalks to 3D glasses, the little things that make our
-                    lives more accessible and immersive always make me pause and ask: how can we create things that feel
+                    enjoyable. From the bumpy yellow dots on sidewalks to 3D glasses, the little things that make
+                    our
+                    lives more accessible and immersive always make me pause and ask: how can we create things that
+                    feel
                     more humane?
                 </p>
                 <p class="text-lg mb-6 leading-relaxed">
@@ -162,7 +180,8 @@
                     powerful tools toward human needs, focusing on wellness, safety, and perception.
                 </p>
                 <p class="text-lg mb-6 leading-relaxed">
-                    My current project involves locomotion in VR, using simulations to evaluate pedestrian safety and
+                    My current project involves locomotion in VR, using simulations to evaluate pedestrian safety
+                    and
                     explore drivers' blind spots.
                 </p>
             </div>
@@ -204,7 +223,7 @@
                     <!-- Item 1: GODOT -->
                     <div class="hud-card p-6 text-center relative gear-item"
                         data-tooltip="Game Engine for VR Development">
-                        <div class="w-12 h-12 mx-auto mb-2">
+                        <div class="w-12 h-12 mx-auto mb-2 flex items-end justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 64 61"
                                 fill="none">
                                 <path
@@ -236,7 +255,7 @@
 
                     <!-- Item 2: META QUEST 2 -->
                     <div class="hud-card p-6 text-center relative gear-item" data-tooltip="Primary VR Testing Device">
-                        <div class="w-12 h-12 mx-auto mb-2">
+                        <div class="w-12 h-12 mx-auto mb-2 flex items-end justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 91 61"
                                 fill="none">
                                 <path
@@ -271,7 +290,7 @@
                     <!-- Item 3: VARJO XR-4 -->
                     <div class="hud-card p-6 text-center relative gear-item"
                         data-tooltip="Advanced XR Research Platform">
-                        <div class="w-24 h-12 mx-auto mb-2">
+                        <div class="w-24 h-12 mx-auto mb-2 flex items-end justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 209 26"
                                 fill="none">
                                 <path
@@ -325,7 +344,8 @@
                     <div
                         class="aspect-[3/2] bg-gradient-to-br from-cyan-900 to-blue-900 rounded mb-4 flex items-center justify-center overflow-hidden">
                         <img src="image/research/EVALUATION OF GUIDED WALKING SPEED TECHNIQUES IN VIRTUAL REALITY.png"
-                            alt="Evaluation of Guided Walking Speed Techniques in VR" class="w-full h-full object-cover"
+                            alt="VR user evaluation of Guided Walking Speed Techniques"
+                            class="w-full h-full object-cover" loading="lazy"
                             onerror="this.parentElement.innerHTML='<span class=&quot;text-4xl&quot;>🚶‍♂️</span>';" />
                     </div>
 
@@ -336,7 +356,8 @@
                         <span class="badge">VR Locomotion</span>
                         <span class="badge">Research</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Evaluating different guided walking techniques to effectively control
+                    <p class="text-gray-300 mb-4">Evaluating different guided walking techniques to effectively
+                        control
                         the walking speed of the user to reduce confounding variables in VR locomotion research.</p>
                     <div class="flex space-x-2 mb-4">
                         <button class="hud-button text-xs">
@@ -361,7 +382,8 @@
                     <div
                         class="aspect-[3/2] bg-gradient-to-br from-blue-900 to-purple-900 rounded mb-4 flex items-center justify-center overflow-hidden">
                         <img src="image/research/SIMULATING DRIVER BLIND SPOTS WITH VR_ IMPLICATIONS FOR PEDESTRIAN SAFETY.png"
-                            alt="Simulating Driver Blind Spots with VR" class="w-full h-full object-cover"
+                            alt="VR simulation view evaluating driver blind spots for pedestrian safety"
+                            class="w-full h-full object-cover" loading="lazy"
                             onerror="this.parentElement.innerHTML='<span class=&quot;text-4xl&quot;>🚛</span>';" />
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SIMULATING DRIVER BLIND SPOTS WITH VR:
@@ -372,7 +394,8 @@
                         <span class="badge">VR Simulation</span>
                         <span class="badge">Transportation</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Advance VR simulation to test the blind spot of vehicles of different
+                    <p class="text-gray-300 mb-4">Advance VR simulation to test the blind spot of vehicles of
+                        different
                         heights, such as trucks and cars, and how it affects the safety of pedestrians and other
                         vehicles.</p>
                     <div class="flex space-x-2 mb-4">
@@ -397,11 +420,11 @@
                 <div class="hud-card p-6">
                     <div
                         class="aspect-[3/2] bg-transparent rounded mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/research/Shore Defender.png" alt="Shore Defender"
-                            class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=&quot;text-4xl&quot;>🌊</span>';" />
+                        <img src="image/research/Shore Defender.png" alt="Shore Defender VR game cover art"
+                            class="w-full h-full object-cover" loading="lazy" />
                     </div>
-                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SHORE DEFENDER: A VR EDUTAINMENT GAME FOR
+                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SHORE DEFENDER: A VR EDUTAINMENT GAME
+                        FOR
                         OCEAN CONSERVATION</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="badge">PUBLISHED</span>
@@ -409,7 +432,8 @@
                         <span class="badge">Conservation</span>
                         <span class="badge">Multiplayer</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Multiplayer virtual reality edutainment game designed to raise public
+                    <p class="text-gray-300 mb-4">Multiplayer virtual reality edutainment game designed to raise
+                        public
                         awareness about
                         ocean conservation and plastic recycling through novel interaction techniques and immersive
                         gameplay experiences.</p>
@@ -442,12 +466,14 @@
 
         <div class="space-y-6">
             <div class="hud-card p-6" data-type="conference">
-                <h3 class="tektur text-lg font-bold mb-2">Shore Defender: A VR Edutainment Game Aiming to Raise Public
+                <h3 class="tektur text-lg font-bold mb-2">Shore Defender: A VR Edutainment Game Aiming to Raise
+                    Public
                     Awareness on Ocean Conservation and Plastic Recycling</h3>
                 <p class="text-sm text-gray-400 mb-2">Authors: Md Azizul Hakim, <span class="text-cyan-400 font-bold">Md
                         Nahid Hasan</span>, Randall Sanders, Jerald Thomas</p>
                 <p class="text-sm text-gray-400 mb-2">IEEE VR</p>
-                <p class="mb-4">Multiplayer virtual reality edutainment game designed to raise public awareness about
+                <p class="mb-4">Multiplayer virtual reality edutainment game designed to raise public awareness
+                    about
                     ocean conservation and plastic recycling through novel interaction technique and and immersive
                     gameplay experiences.</p>
                 <div class="flex gap-2">
@@ -463,13 +489,15 @@
             </div>
 
             <div class="hud-card p-6" data-type="journal">
-                <h3 class="tektur text-lg font-bold mb-2">Advancing Breast Cancer Diagnosis: Attention-Enhanced U-Net
+                <h3 class="tektur text-lg font-bold mb-2">Advancing Breast Cancer Diagnosis: Attention-Enhanced
+                    U-Net
                     for Breast Cancer Segmentation</h3>
                 <p class="text-sm text-gray-400 mb-2">Authors: <span class="text-cyan-400 font-bold">Md Nahid
                         Hasan</span>, Adit Ishraq, Ashraful Alam Emon, Jungpil Shin, Md Mohsin Kabir</p>
                 <p class="text-sm text-gray-400 mb-2">Springer</p>
                 <p class="mb-4">An attention-enhanced U-Net with saliency mechanisms improves breast cancer
-                    segmentation, offering greater accuracy, efficiency, and adaptability than conventional models while
+                    segmentation, offering greater accuracy, efficiency, and adaptability than conventional models
+                    while
                     showing promise for wider medical imaging use.</p>
                 <div class="flex gap-2">
                     <a href="https://link.springer.com/chapter/10.1007/. _11" target="_blank"
@@ -486,12 +514,15 @@
             <div class="hud-card p-6" data-type="journal">
                 <h3 class="tektur text-lg font-bold mb-2">Road sign detection using variants of yolo and r-cnn: An
                     analysis from the perspective of bangladesh</h3>
-                <p class="text-sm text-gray-400 mb-2">Authors: Aklima Akter Lima, Md Mohsin Kabir, Sujoy Chandra Das,
+                <p class="text-sm text-gray-400 mb-2">Authors: Aklima Akter Lima, Md Mohsin Kabir, Sujoy Chandra
+                    Das,
                     <span class="text-cyan-400 font-bold">Md Nahid Hasan</span>, MF Mridha
                 </p>
                 <p class="text-sm text-gray-400 mb-2">Springer</p>
-                <p class="mb-4">Using the BDRS 2021 dataset, this study identifies YOLOv3 and Faster R-CNN as the most
-                    effective among seven models for real-time road sign detection, thereby enhancing ADAS systems to
+                <p class="mb-4">Using the BDRS 2021 dataset, this study identifies YOLOv3 and Faster R-CNN as the
+                    most
+                    effective among seven models for real-time road sign detection, thereby enhancing ADAS systems
+                    to
                     improve driver awareness and road safety.</p>
                 <div class="flex gap-2">
                     <a href="https://link.springer.com/chapter/10.1007/. _42" target="_blank"
@@ -509,11 +540,13 @@
                 <h3 class="tektur text-lg font-bold mb-2">Information-based mobile application to tackle covid-19
                     circumstances</h3>
                 <p class="text-sm text-gray-400 mb-2">Authors: Sakhawat Hossain, <span
-                        class="text-cyan-400 font-bold">Md Nahid Hasan</span>, Md Nazibul Islam, Mamunur Rashid Mukto,
+                        class="text-cyan-400 font-bold">Md Nahid Hasan</span>, Md Nazibul Islam, Mamunur Rashid
+                    Mukto,
                     Md Shahnewaz Abid, Fahima Khanam</p>
                 <p class="text-sm text-gray-400 mb-2">Journal of Scientific Research and Reports</p>
                 <p class="mb-4">An accessible IoMT-driven HCI application integrates real-time health monitoring,
-                    COVID-19 tracking, and telemedicine services to strengthen pandemic response and improve healthcare
+                    COVID-19 tracking, and telemedicine services to strengthen pandemic response and improve
+                    healthcare
                     delivery in developing countries</p>
                 <div class="flex gap-2">
                     <a href="https://www.researchgate.net/publication/349917319_Information-Based_Mobile_Application_to_Tackle_COVID-19_Circumstances"
@@ -547,7 +580,8 @@
                         class="w-[85vw] max-w-[85vw] md:w-auto md:max-w-none md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
                         <div class="w-full aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
                             onclick="loadVideo(this, 'Dodl2BjuKtI')">
-                            <img src="https://img.youtube.com/vi/Dodl2BjuKtI/hqdefault.jpg" alt="Video Thumbnail"
+                            <img src="https://img.youtube.com/vi/Dodl2BjuKtI/hqdefault.jpg"
+                                alt="Setting up XR in Godot Engine video thumbnail" loading="lazy"
                                 class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
@@ -575,7 +609,8 @@
                         class="w-[85vw] max-w-[85vw] md:w-auto md:max-w-none md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
                         <div class="w-full aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
                             onclick="loadVideo(this, 'PnYMR95N344')">
-                            <img src="https://img.youtube.com/vi/PnYMR95N344/hqdefault.jpg" alt="Video Thumbnail"
+                            <img src="https://img.youtube.com/vi/PnYMR95N344/hqdefault.jpg"
+                                alt="Distance-Based Grabbing in VR Godot Engine video thumbnail" loading="lazy"
                                 class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
@@ -584,7 +619,8 @@
                                 </svg>
                             </div>
                         </div>
-                        <h3 class="tektur text-lg font-bold text-cyan-400 mb-2">02 Distance-Based Grabbing in VR</h3>
+                        <h3 class="tektur text-lg font-bold text-cyan-400 mb-2">02 Distance-Based Grabbing in VR
+                        </h3>
                         <p class="text-sm text-gray-300">Implement distance grabbing in Godot VR.</p>
                         <div class="mt-4">
                             <a href="https://www.youtube.com/watch?v=PnYMR95N344" target="_blank"
@@ -602,7 +638,8 @@
                         class="w-[85vw] max-w-[85vw] md:w-auto md:max-w-none md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
                         <div class="w-full aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
                             onclick="loadVideo(this, 'rwYDdCRlKCE')">
-                            <img src="https://img.youtube.com/vi/rwYDdCRlKCE/hqdefault.jpg" alt="Video Thumbnail"
+                            <img src="https://img.youtube.com/vi/rwYDdCRlKCE/hqdefault.jpg"
+                                alt="VR Climbing Natural Climbing Interactions video thumbnail" loading="lazy"
                                 class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
@@ -630,7 +667,8 @@
                         class="w-[85vw] max-w-[85vw] md:w-auto md:max-w-none md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
                         <div class="w-full aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
                             onclick="loadVideo(this, '0rsNQhLoc88')">
-                            <img src="https://img.youtube.com/vi/0rsNQhLoc88/hqdefault.jpg" alt="Video Thumbnail"
+                            <img src="https://img.youtube.com/vi/0rsNQhLoc88/hqdefault.jpg"
+                                alt="Advanced VR Slicing Interaction video thumbnail" loading="lazy"
                                 class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
@@ -658,7 +696,8 @@
                         class="w-[85vw] max-w-[85vw] md:w-auto md:max-w-none md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
                         <div class="w-full aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
                             onclick="loadVideo(this, 'doI7oWqkkTw')">
-                            <img src="https://img.youtube.com/vi/doI7oWqkkTw/hqdefault.jpg" alt="Video Thumbnail"
+                            <img src="https://img.youtube.com/vi/doI7oWqkkTw/hqdefault.jpg"
+                                alt="Shooting game VR Mechanics video thumbnail" loading="lazy"
                                 class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
@@ -686,7 +725,8 @@
                         class="w-[85vw] max-w-[85vw] md:w-auto md:max-w-none md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
                         <div class="w-full aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
                             onclick="loadVideo(this, 'xWGP84gCquY')">
-                            <img src="https://img.youtube.com/vi/xWGP84gCquY/hqdefault.jpg" alt="Video Thumbnail"
+                            <img src="https://img.youtube.com/vi/xWGP84gCquY/hqdefault.jpg"
+                                alt="VR Breathing Therapy App video thumbnail" loading="lazy"
                                 class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
@@ -714,7 +754,8 @@
                         class="w-[85vw] max-w-[85vw] md:w-auto md:max-w-none md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
                         <div class="w-full aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
                             onclick="loadVideo(this, 'Zb_mTyWeHYc')">
-                            <img src="https://img.youtube.com/vi/Zb_mTyWeHYc/hqdefault.jpg" alt="Video Thumbnail"
+                            <img src="https://img.youtube.com/vi/Zb_mTyWeHYc/hqdefault.jpg"
+                                alt="Healthy Eating Trainer Educational Python App video thumbnail" loading="lazy"
                                 class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
@@ -742,7 +783,8 @@
                         class="w-[85vw] max-w-[85vw] md:w-auto md:max-w-none md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-center hud-card p-4 flex-shrink-0">
                         <div class="w-full aspect-video mb-4 flex items-center justify-center overflow-hidden rounded bg-black relative cursor-pointer group/video"
                             onclick="loadVideo(this, 'vHOl_k28R18')">
-                            <img src="https://img.youtube.com/vi/vHOl_k28R18/hqdefault.jpg" alt="Video Thumbnail"
+                            <img src="https://img.youtube.com/vi/vHOl_k28R18/hqdefault.jpg"
+                                alt="Virtual Painting HCI App video thumbnail" loading="lazy"
                                 class="w-full h-full object-cover opacity-80 group-hover/video:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-80 group-hover/video:opacity-100 transition-opacity drop-shadow-lg"
@@ -811,7 +853,8 @@
                         <div class="ml-12 md:ml-20 hud-card p-6">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                 <div>
-                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">MS IN COMPUTER SCIENCE</h3>
+                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">MS IN COMPUTER SCIENCE
+                                    </h3>
                                     <p class="text-lg font-semibold">University of Wisconsin-Milwaukee</p>
                                     <p class="text-gray-400">Wisconsin, USA</p>
                                 </div>
@@ -842,9 +885,11 @@
                         <div class="ml-12 md:ml-20 hud-card p-6">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                 <div>
-                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">BSC ENGG IN COMPUTER SCIENCE
+                                    <h3 class="tektur text-xl font-bold text-cyan-400 mb-2">BSC ENGG IN COMPUTER
+                                        SCIENCE
                                         AND ENGINEERING</h3>
-                                    <p class="text-lg font-semibold">Bangladesh University of Business and Technology
+                                    <p class="text-lg font-semibold">Bangladesh University of Business and
+                                        Technology
                                     </p>
                                     <p class="text-gray-400">Dhaka, Bangladesh</p>
                                     <p class="text-sm text-gray-400 mt-2">Major: Artificial Intelligence and Expert
@@ -878,9 +923,9 @@
                 <!-- Project 1 - VR Rhythm Saber Combat -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/VR RHYTHM SABER COMBAT.png" alt="VR Rhythm Saber Combat"
-                            class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>⚔️</span>';">
+                        <img src="image/projects/VR RHYTHM SABER COMBAT.png"
+                            alt="VR Rhythm Saber Combat gameplay showcasing user slicing blocks"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR RHYTHM SABER COMBAT</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -889,9 +934,12 @@
                         <span class="badge">Rehabilitation</span>
                         <span class="badge">Music-Driven</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Turning hand therapy into an exciting music-driven VR game. Players
-                        slice the cubes flying toward them and practice sensory coordination by processing the visual
-                        cue and timing their sword swings, which helps improve range of motion (ROM), fine motor skills,
+                    <p class="text-gray-300 mb-4">Turning hand therapy into an exciting music-driven VR game.
+                        Players
+                        slice the cubes flying toward them and practice sensory coordination by processing the
+                        visual
+                        cue and timing their sword swings, which helps improve range of motion (ROM), fine motor
+                        skills,
                         and hand-eye coordination as part of upper limb rehabilitation.</p>
                     <div class="flex space-x-2 mb-4">
                         <button class="hud-button text-xs">
@@ -907,9 +955,9 @@
                 <!-- Project 2 - Accessible VR Locomotion -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/ACCESSIBLE VR LOCOMOTION.png" alt="Accessible VR Locomotion"
-                            class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>♿</span>';">
+                        <img src="image/projects/ACCESSIBLE VR LOCOMOTION.png"
+                            alt="Accessible VR Locomotion showcasing wheelchair-based VR interaction"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">ACCESSIBLE VR LOCOMOTION</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -918,8 +966,10 @@
                         <span class="badge">Motor Rehabilitation</span>
                         <span class="badge">Therapeutic</span>
                     </div>
-                    <p class="text-gray-300 mb-4">By combining hand-based forward and backward movement with head-angled
-                        direction, this application creates an intuitive locomotion technique that mirrors the natural
+                    <p class="text-gray-300 mb-4">By combining hand-based forward and backward movement with
+                        head-angled
+                        direction, this application creates an intuitive locomotion technique that mirrors the
+                        natural
                         hand motions wheelchair users employ to propel themselves. In addition to enhancing
                         accessibility in virtual environments, it also provides therapeutic exercises for motor
                         rehabilitation, neck therapy, and spinal health.</p>
@@ -937,9 +987,9 @@
                 <!-- Project 3 - Bimanual VR Manipulation -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/BIMANUAL VR MANIPULATION.png" alt="Bimanual VR Manipulation"
-                            class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🤏</span>';">
+                        <img src="image/projects/BIMANUAL VR MANIPULATION.png"
+                            alt="Bimanual VR Manipulation interacting with engine parts"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">BIMANUAL VR MANIPULATION</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -948,7 +998,8 @@
                         <span class="badge">Educational</span>
                         <span class="badge">Therapeutic</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Users manipulate objects with both hands, scaling and repositioning
+                    <p class="text-gray-300 mb-4">Users manipulate objects with both hands, scaling and
+                        repositioning
                         them in real time. This system supports educational and engineering tasks like engine part
                         inspection while promoting therapeutic practice for improving hand and motor function.</p>
                     <div class="flex space-x-2 mb-4">
@@ -965,8 +1016,8 @@
                 <!-- Project 4 - VR Climbing -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/vrclimb.jpg" alt="VR Climbing" class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🧗‍♂️</span>';">
+                        <img src="image/projects/vrclimb.jpg" alt="User utilizing two-handed VR Climbing app"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR CLIMBING</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -976,7 +1027,8 @@
                         <span class="badge">Therapy</span>
                     </div>
                     <p class="text-gray-300 mb-4">By replicating natural two-handed climbing interactions, this VR
-                        application provides repetitive exercises for hand and upper-body rehabilitation. At the same
+                        application provides repetitive exercises for hand and upper-body rehabilitation. At the
+                        same
                         time, it serves as an exposure-based training tool for overcoming height phobia.</p>
                     <div class="flex space-x-2 mb-4">
                         <a href="https://www.behance.net/gallery/183357879/VR-CLIMBING" target="_blank"
@@ -1001,8 +1053,9 @@
                 <!-- Project 5 - Slicing in VR -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/vr slicing.jpg" alt="Slicing in VR" class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🔪</span>';">
+                        <img src="image/projects/vr slicing.jpg"
+                            alt="Demonstration of object cutting and physics in VR slicing project"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SLICING IN VR</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -1027,9 +1080,9 @@
                 <!-- Project 6 - Shooting in VR -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/vr shooting.jpg" alt="Shooting in VR"
-                            class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🎯</span>';">
+                        <img src="image/projects/vr shooting.jpg"
+                            alt="Showcase of shooting mechanics with hit detection in VR"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">SHOOTING IN VR</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -1055,9 +1108,8 @@
                 <!-- Project 7 - VR Breathing Therapy -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/vr breathing.png" alt="VR Breathing Therapy"
-                            class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🧘‍♂️</span>';">
+                        <img src="image/projects/vr breathing.png" alt="Relaxing landscape used in VR Breathing Therapy"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VR BREATHING THERAPY</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -1066,8 +1118,10 @@
                         <span class="badge">Therapeutic</span>
                         <span class="badge">Mental Well-being</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Users practice structured breathing patterns in a soothing VR space
-                        designed with visual and auditory relaxation cues. This VR application uses mindfulness training
+                    <p class="text-gray-300 mb-4">Users practice structured breathing patterns in a soothing VR
+                        space
+                        designed with visual and auditory relaxation cues. This VR application uses mindfulness
+                        training
                         with therapeutic breathing techniques to improve mental well-being and reduce anxiety.</p>
                     <div class="flex space-x-2 mb-4">
                         <a href="https://www.youtube.com/watch?v=xWGP84gCquY&t=25s" target="_blank"
@@ -1084,9 +1138,9 @@
                 <!-- Project 8 - Healthy Eating Trainer -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/virtual eating habit.jpg" alt="Healthy Eating Trainer"
-                            class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🍎</span>';">
+                        <img src="image/projects/virtual eating habit.jpg"
+                            alt="Healthy Eating Trainer app interface tracking facial cues for eating"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">HEALTHY EATING TRAINER</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -1112,9 +1166,9 @@
                 <!-- Project 9 - Virtual Painting -->
                 <div class="hud-card p-6">
                     <div class="aspect-[3/2] mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="image/projects/virtual painting.jpg" alt="Virtual Painting"
-                            class="w-full h-full object-cover"
-                            onerror="this.parentElement.innerHTML='<span class=\'text-4xl\'>🎨</span>';">
+                        <img src="image/projects/virtual painting.jpg"
+                            alt="User controlling digital brush using hand tracking in Virtual Painting app"
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <h3 class="tektur text-xl font-bold text-cyan-400 mb-4">VIRTUAL PAINTING</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -1123,7 +1177,8 @@
                         <span class="badge">HCI</span>
                         <span class="badge">Computer Vision</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Developed a virtual painting app using Python, merging AI with HCI via
+                    <p class="text-gray-300 mb-4">Developed a virtual painting app using Python, merging AI with HCI
+                        via
                         advanced hand tracking and computer vision.</p>
                     <div class="flex space-x-2 mb-4">
                         <a href="https://www.youtube.com/watch?v=vHOl_k28R18" target="_blank"

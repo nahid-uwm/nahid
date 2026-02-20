@@ -1,36 +1,43 @@
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+
 // Custom Cursor - Instant Real-time Movement
 const cursor = document.querySelector('.custom-cursor');
 
-document.addEventListener('mousemove', (e) => {
-    // Use transform for hardware acceleration and instant updates
-    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-});
+if (!isTouchDevice && !prefersReducedMotion) {
+    document.addEventListener('mousemove', (e) => {
+        // Use transform for hardware acceleration and instant updates
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
 
-// Cursor hover effects
-document.addEventListener('mouseover', (e) => {
-    if (e.target.matches('button, a, .gear-item')) {
-        cursor.classList.add('cursor-hover');
-    }
-});
+    // Cursor hover effects
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.matches('button, a, .gear-item')) {
+            cursor.classList.add('cursor-hover');
+        }
+    });
 
-document.addEventListener('mouseout', (e) => {
-    if (e.target.matches('button, a, .gear-item')) {
-        cursor.classList.remove('cursor-hover');
-    }
-});
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.matches('button, a, .gear-item')) {
+            cursor.classList.remove('cursor-hover');
+        }
+    });
 
-document.addEventListener('mousedown', () => {
-    cursor.classList.add('cursor-click');
-});
+    document.addEventListener('mousedown', () => {
+        cursor.classList.add('cursor-click');
+    });
 
-document.addEventListener('mouseup', () => {
-    cursor.classList.remove('cursor-click');
-});
+    document.addEventListener('mouseup', () => {
+        cursor.classList.remove('cursor-click');
+    });
+} else if (cursor) {
+    cursor.style.display = 'none';
+}
 
 // Starfield
 function createStarfield() {
     const starfield = document.getElementById('starfield');
-    if (!starfield) return;
+    if (!starfield || prefersReducedMotion) return;
 
     const numStars = 200;
     const stars = [];
@@ -142,6 +149,12 @@ function closeMobileMenu() {
 
 hamburger.addEventListener('click', toggleMobileMenu);
 
+// Setup close menu button
+const closeMenuBtn = document.getElementById('closeMenuBtn');
+if (closeMenuBtn) {
+    closeMenuBtn.addEventListener('click', closeMobileMenu);
+}
+
 // Close mobile menu when clicking overlay
 mobileOverlay.addEventListener('click', closeMobileMenu);
 
@@ -190,7 +203,17 @@ function updateProgressDots() {
     });
 }
 
-window.addEventListener('scroll', updateProgressDots);
+// Throttle scroll events for better performance
+let isUpdatingProgress = false;
+window.addEventListener('scroll', () => {
+    if (!isUpdatingProgress) {
+        window.requestAnimationFrame(() => {
+            updateProgressDots();
+            isUpdatingProgress = false;
+        });
+        isUpdatingProgress = true;
+    }
+}, { passive: true });
 
 // Tooltips
 const tooltip = document.getElementById('tooltip');
@@ -241,14 +264,42 @@ if (contactForm) {
     });
 }
 
-// Navigation links
-document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
+// Navigation links (using event delegation for better performance)
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('nav a[href^="#"]');
+    if (link) {
         e.preventDefault();
         const targetId = link.getAttribute('href').substring(1);
         scrollToSection(targetId);
-    });
+    }
 });
+
+// Centralized Image Error Handling
+document.addEventListener('error', function (e) {
+    if (e.target.tagName.toLowerCase() === 'img') {
+        const img = e.target;
+        const parent = img.parentElement;
+        if (parent && parent.classList.contains('aspect-[3/2]')) {
+            let emoji = '🖼️'; // Default
+            const src = img.src.toLowerCase();
+            if (src.includes('evaluating') || src.includes('walking')) emoji = '🚶‍♂️';
+            else if (src.includes('blind') || src.includes('driver')) emoji = '🚛';
+            else if (src.includes('shore')) emoji = '🌊';
+            else if (src.includes('saber')) emoji = '⚔️';
+            else if (src.includes('accessible')) emoji = '♿';
+            else if (src.includes('bimanual')) emoji = '🤏';
+            else if (src.includes('climb')) emoji = '🧗‍♂️';
+            else if (src.includes('slicing')) emoji = '🔪';
+            else if (src.includes('shooting')) emoji = '🎯';
+            else if (src.includes('breathing')) emoji = '🧘‍♂️';
+            else if (src.includes('eating')) emoji = '🍎';
+            else if (src.includes('painting')) emoji = '🎨';
+            else if (src.includes('hex')) emoji = '🔬';
+
+            parent.innerHTML = `<span class="text-4xl">${emoji}</span>`;
+        }
+    }
+}, true); // Use capture phase to catch non-bubbling error events
 
 // Initialize
 createStarfield();
