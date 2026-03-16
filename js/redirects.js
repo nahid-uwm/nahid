@@ -5,5 +5,7 @@
 
 const REDIRECTS = {
     "/googlescholar": "https://scholar.google.com/citations?user=xQR0_1QAAAAJ&hl",
-    "/projectname": "https://example.com/your-project-link"
+    "/github": "https://github.com/nahid-uwm",
+    "/linkedin": "https://www.linkedin.com/in/zanahid/"
+    "/youtube": "https://www.youtube.com/@nahidhci"
 };
