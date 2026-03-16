@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    
+    <!-- Load the redirects list -->
+    <script src="/js/redirects.js"></script>
+    
+    <!-- Styles matching your portfolio -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Tektur:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0b0f19; /* matching your dark theme */
+            color: #fff;
+            font-family: 'IBM Plex Mono', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .tektur { font-family: 'Tektur', sans-serif; }
+        .text-cyan-400 { color: #22d3ee; }
+        a {
+            color: #22d3ee;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #22d3ee;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        a:hover { 
+            background-color: #22d3ee; 
+            color: #000; 
+        }
+    </style>
+
+    <script>
+        window.onload = function() {
+            // 1. Get the current path, normalize it to lowercase
+            let path = window.location.pathname.toLowerCase();
+            
+            // 2. Remove trailing slash for consistency (unless it's just '/')
+            if (path.length > 1 && path.endsWith('/')) {
+                path = path.slice(0, -1);
+            }
+
+            // 3. Check if there's a match in our REDIRECTS object
+            let destination = null;
+            if (typeof REDIRECTS !== 'undefined') {
+                destination = REDIRECTS[path] || REDIRECTS[path + '/'];
+            }
+
+            // 4. If found, redirect. Else, show 404.
+            if (destination) {
+                window.location.replace(destination);
+            } else {
+                document.title = "404 - Page Not Found";
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('not-found').style.display = 'block';
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="loading">
+        <h2 class="tektur text-cyan-400">Loading...</h2>
+    </div>
+
+    <div id="not-found" style="display: none;">
+        <h1 class="tektur text-cyan-400" style="font-size: 5rem; margin-bottom: 0;">404</h1>
+        <p style="font-size: 1.25rem; margin-bottom: 2rem;">The page or link you are looking for does not exist.</p>
+        <a href="/">Return to Homepage</a>
+    </div>
+</body>
+</html>
