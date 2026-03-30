@@ -226,7 +226,8 @@ gearItems.forEach(item => {
         tooltip.classList.add('show');
 
         const rect = item.getBoundingClientRect();
-        tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+        const rawLeft = rect.left + rect.width / 2 - tooltip.offsetWidth / 2;
+        tooltip.style.left = Math.max(8, Math.min(rawLeft, window.innerWidth - tooltip.offsetWidth - 8)) + 'px';
         tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + 'px';
     });
 
@@ -305,7 +306,6 @@ document.addEventListener('error', function (e) {
 createStarfield();
 updateProgressDots();
 
-// YouTube Video Lazy Load
 // YouTube Video Lazy Load
 window.loadVideo = function (element, videoId) {
     const iframe = document.createElement('iframe');

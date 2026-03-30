@@ -7,8 +7,29 @@
     <title>MD NAHID HASAN - VR Research Portfolio</title>
     <meta name="description"
         content="Portfolio of MD NAHID HASAN, an MS CS student at UW-Milwaukee specializing in Virtual Reality (VR), Human-Computer Interaction (HCI), AI/ML, and safety research.">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nahidux.com/">
+
+    <!-- Favicon -->
+    <!-- TODO: Add your favicon file (e.g. favicon.ico or favicon.png) to the project root and update the href below -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Open Graph (social sharing previews) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nahidux.com/">
+    <meta property="og:title" content="MD NAHID HASAN - VR/HCI Researcher">
+    <meta property="og:description" content="Portfolio of MD NAHID HASAN, an MS CS student at UW-Milwaukee specializing in Virtual Reality, HCI, AI/ML, and safety research.">
+    <!-- TODO: Create a social preview image (1200x630px recommended) and update the og:image URL below -->
+    <meta property="og:image" content="https://nahidux.com/image/og-preview.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MD NAHID HASAN - VR/HCI Researcher">
+    <meta name="twitter:description" content="Portfolio of MD NAHID HASAN, an MS CS student at UW-Milwaukee specializing in Virtual Reality, HCI, AI/ML, and safety research.">
+    <!-- TODO: Same image as og:image above — update when the file exists -->
+    <meta name="twitter:image" content="https://nahidux.com/image/og-preview.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style"
@@ -21,6 +42,9 @@
 </head>
 
 <body>
+    <!-- Skip to main content (keyboard accessibility) -->
+    <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-black focus:text-cyan-400 focus:px-4 focus:py-2 focus:border focus:border-cyan-400">Skip to main content</a>
+
     <!-- Custom Cursor -->
     <div class="custom-cursor"></div>
 
@@ -28,16 +52,16 @@
     <div class="starfield" id="starfield"></div>
 
     <!-- Progress Dots -->
-    <div class="progress-dots">
-        <div class="progress-dot active" data-section="hero"></div>
-        <div class="progress-dot" data-section="about"></div>
-        <div class="progress-dot" data-section="research"></div>
-        <div class="progress-dot" data-section="publications"></div>
-        <div class="progress-dot" data-section="education"></div>
-        <div class="progress-dot" data-section="projects"></div>
-        <div class="progress-dot" data-section="teaching"></div>
-        <div class="progress-dot" data-section="lab"></div>
-        <div class="progress-dot" data-section="contact"></div>
+    <div class="progress-dots" role="navigation" aria-label="Page sections">
+        <button class="progress-dot active" data-section="hero" aria-label="Go to Hero section"></button>
+        <button class="progress-dot" data-section="about" aria-label="Go to About section"></button>
+        <button class="progress-dot" data-section="research" aria-label="Go to Research section"></button>
+        <button class="progress-dot" data-section="publications" aria-label="Go to Publications section"></button>
+        <button class="progress-dot" data-section="education" aria-label="Go to Education section"></button>
+        <button class="progress-dot" data-section="projects" aria-label="Go to Projects section"></button>
+        <button class="progress-dot" data-section="teaching" aria-label="Go to Experience section"></button>
+        <button class="progress-dot" data-section="lab" aria-label="Go to HEXLab section"></button>
+        <button class="progress-dot" data-section="contact" aria-label="Go to Contact section"></button>
     </div>
 
     <!-- Navigation -->
@@ -61,11 +85,11 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="lg:hidden hamburger" id="hamburger" role="button" aria-label="Toggle menu" tabindex="0">
+                <button class="lg:hidden hamburger" id="hamburger" aria-label="Toggle menu">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </div>
     </nav>
@@ -360,6 +384,7 @@
                         control
                         the walking speed of the user to reduce confounding variables in VR locomotion research.</p>
                     <div class="flex space-x-2 mb-4">
+                        <!-- TODO: Add href link for "Open Dossier" (e.g. paper/project page URL) — change <button> to <a href="YOUR_LINK" target="_blank"> -->
                         <button class="hud-button text-xs">
                             <div class="decorator top left"></div>
                             <div class="decorator top right"></div>
@@ -367,6 +392,7 @@
                             <div class="decorator bottom right"></div>
                             Open Dossier
                         </button>
+                        <!-- TODO: Add href link for "Video" (e.g. YouTube URL) — change <button> to <a href="YOUR_LINK" target="_blank"> -->
                         <button class="hud-button text-xs">
                             <div class="decorator top left"></div>
                             <div class="decorator top right"></div>
@@ -399,6 +425,7 @@
                         heights, such as trucks and cars, and how it affects the safety of pedestrians and other
                         vehicles.</p>
                     <div class="flex space-x-2 mb-4">
+                        <!-- TODO: Add href link for "Open Dossier" (e.g. paper/project page URL) — change <button> to <a href="YOUR_LINK" target="_blank"> -->
                         <button class="hud-button text-xs">
                             <div class="decorator top left"></div>
                             <div class="decorator top right"></div>
@@ -406,6 +433,7 @@
                             <div class="decorator bottom right"></div>
                             Open Dossier
                         </button>
+                        <!-- TODO: Add href link for "Video" (e.g. YouTube URL) — change <button> to <a href="YOUR_LINK" target="_blank"> -->
                         <button class="hud-button text-xs">
                             <div class="decorator top left"></div>
                             <div class="decorator top right"></div>
@@ -942,6 +970,7 @@
                         skills,
                         and hand-eye coordination as part of upper limb rehabilitation.</p>
                     <div class="flex space-x-2 mb-4">
+                        <!-- TODO: Add YouTube link for VR Rhythm Saber Combat — change <button> to <a href="YOUR_YOUTUBE_URL" target="_blank"> -->
                         <button class="hud-button text-xs">
                             <div class="decorator top left"></div>
                             <div class="decorator top right"></div>
@@ -974,6 +1003,7 @@
                         accessibility in virtual environments, it also provides therapeutic exercises for motor
                         rehabilitation, neck therapy, and spinal health.</p>
                     <div class="flex space-x-2 mb-4">
+                        <!-- TODO: Add YouTube link for Accessible VR Locomotion — change <button> to <a href="YOUR_YOUTUBE_URL" target="_blank"> -->
                         <button class="hud-button text-xs">
                             <div class="decorator top left"></div>
                             <div class="decorator top right"></div>
@@ -1003,6 +1033,7 @@
                         them in real time. This system supports educational and engineering tasks like engine part
                         inspection while promoting therapeutic practice for improving hand and motor function.</p>
                     <div class="flex space-x-2 mb-4">
+                        <!-- TODO: Add YouTube link for Bimanual VR Manipulation — change <button> to <a href="YOUR_YOUTUBE_URL" target="_blank"> -->
                         <button class="hud-button text-xs">
                             <div class="decorator top left"></div>
                             <div class="decorator top right"></div>

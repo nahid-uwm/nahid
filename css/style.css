@@ -109,8 +109,6 @@ body {
     border: 1px solid transparent;
     background-color: var(--accent-primary);
     color: var(--bg-secondary);
-    /* animation: 0.07s flicker;
-    animation-iteration-count: 2; */
     transition: all 0.35s cubic-bezier(0.75, 0, 0.25, 1);
 }
 
@@ -123,8 +121,6 @@ body {
     width: 10px;
     height: 10px;
     border: 1px solid transparent;
-    /* animation: 0.1s flicker;
-    animation-iteration-count: 3; */
     transition: all 0.35s cubic-bezier(0.75, 0, 0.25, 1);
 }
 
@@ -167,19 +163,6 @@ body {
     right: -16px;
     border-right: 1px solid var(--accent-primary);
 }
-
-/* @keyframes flicker {
-
-    0%,
-    50% {
-        opacity: 0;
-    }
-
-    51%,
-    100% {
-        opacity: 1;
-    }
-} */
 
 .badge {
     background: rgba(0, 255, 255, 0.1);
@@ -385,6 +368,7 @@ body {
 .progress-dot {
     width: 12px;
     height: 12px;
+    padding: 0;
     border: 2px solid rgba(0, 255, 255, 0.5);
     border-radius: 50%;
     background: transparent;
@@ -473,7 +457,7 @@ body {
 }
 
 .tooltip {
-    position: absolute;
+    position: fixed;
     background: rgba(0, 0, 0, 0.9);
     color: var(--accent-primary);
     padding: 8px 12px;
