@@ -44,82 +44,293 @@ function createStarfield() {
     let mouseX = -1000;
     let mouseY = -1000;
 
-    // Create stars
+    // Star color temperature palette
+    function randomStarColor() {
+        const r = Math.random() * 100;
+        if (r < 30) return '#cce8ff'; // hot blue-white
+        if (r < 80) return '#ffffff'; // white
+        return '#ffe4b0';             // warm yellow
+    }
+
+    // Create stars with type classification
     for (let i = 0; i < numStars; i++) {
         const star = document.createElement('div');
         star.className = 'star';
 
-        // Random position
         const initialX = Math.random() * 100;
         const initialY = Math.random() * 100;
-
         star.style.left = initialX + '%';
-        star.style.top = initialY + '%';
+        star.style.top  = initialY + '%';
 
-        // Random size for variety
-        const size = Math.random() * 2 + 1;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
+        // 60% normal, 30% twinkler, 10% giant
+        const roll = Math.random();
+        let type, size, baseOpacity, color;
 
-        // Random animation delay for twinkling if we add it later
-        star.style.animationDelay = Math.random() * 3 + 's';
+        if (roll < 0.60) {
+            type        = 'normal';
+            size        = Math.random() * 1.5 + 0.5;
+            baseOpacity = Math.random() * 0.2 + 0.15;
+            color       = randomStarColor();
+        } else if (roll < 0.90) {
+            type        = 'twinkler';
+            size        = Math.random() * 1.5 + 0.5;
+            baseOpacity = 0; // driven by sine wave
+            color       = randomStarColor();
+        } else {
+            type        = 'giant';
+            size        = Math.random() * 2 + 2.5;
+            baseOpacity = Math.random() * 0.3 + 0.4;
+            color       = '#ffe4b0';
+        }
+
+        star.style.width      = size + 'px';
+        star.style.height     = size + 'px';
+        star.style.background = color;
+        star.style.opacity    = baseOpacity;
 
         starfield.appendChild(star);
 
         stars.push({
-            element: star,
-            x: initialX, // percentage
-            y: initialY  // percentage
+            element:      star,
+            x:            initialX,
+            y:            initialY,
+            type,
+            size,
+            baseOpacity,
+            color,
+            twinkleSpeed: Math.random() * 0.0015 + 0.0005,
+            twinklePhase: Math.random() * Math.PI * 2,
+            pulseSpeed:   Math.random() * 0.0008 + 0.0003,
+            pulsePhase:   Math.random() * Math.PI * 2,
+            alive:        true,
         });
     }
 
-    // Track mouse movement
+    // Track mouse
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
 
-    // Animation loop
-    function animate() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const repulsionRadius = 150;
+    // --- CLICK SHOCKWAVE ---
+    let shockwave = null;
+    document.addEventListener('mousedown', (e) => {
+        if (isTouchDevice) return;
+        shockwave = { x: e.clientX, y: e.clientY, time: performance.now() };
+
+        // Visual ripple ring
+        const ring = document.createElement('div');
+        ring.style.cssText = [
+            `position:fixed`,
+            `left:${e.clientX}px`,
+            `top:${e.clientY}px`,
+            `width:4px`,
+            `height:4px`,
+            `border-radius:50%`,
+            `border:1px solid rgba(34,211,238,0.35)`,
+            `box-shadow:0 0 8px 2px rgba(34,211,238,0.12)`,
+            `transform:translate(-50%,-50%) scale(1)`,
+            `animation:click-wave 0.7s ease-out forwards`,
+            `pointer-events:none`,
+            `z-index:9998`,
+        ].join(';');
+        document.body.appendChild(ring);
+        setTimeout(() => ring.remove(), 750);
+    });
+
+    // --- 3D SUPERNOVA ---
+    function triggerSupernova() {
+        const candidates = stars.filter(s => {
+            if (!s.alive) return false;
+            const sx = (s.x / 100) * window.innerWidth;
+            const sy = (s.y / 100) * window.innerHeight;
+            return Math.hypot(mouseX - sx, mouseY - sy) > 200;
+        });
+        if (!candidates.length) return;
+
+        const star = candidates[Math.floor(Math.random() * candidates.length)];
+        star.alive = false;
+        const el = star.element;
+
+        // Bloom bright white
+        el.style.transition = 'width 0.2s, height 0.2s, opacity 0.15s, box-shadow 0.15s, background 0.1s';
+        el.style.width      = '8px';
+        el.style.height     = '8px';
+        el.style.opacity    = '1';
+        el.style.background = '#ffffff';
+        el.style.boxShadow  = '0 0 14px rgba(255,255,255,0.9), 0 0 28px rgba(34,211,238,0.5)';
+
+        // 3D supernova container with perspective
+        const nova = document.createElement('div');
+        nova.style.cssText = `position:absolute;left:${star.x}%;top:${star.y}%;width:0;height:0;pointer-events:none;z-index:1;perspective:300px;transform-style:preserve-3d;`;
+
+        // Core glow — radial gradient that expands then fades
+        const core = document.createElement('div');
+        core.className = 'supernova-core';
+        nova.appendChild(core);
+
+        // Ring A — main cyan ring, tilted 65° for 3D ellipse
+        const ringA = document.createElement('div');
+        ringA.className = 'supernova-ring-a';
+        nova.appendChild(ringA);
+
+        // Ring B — pink accent ring, different tilt, slight delay
+        const ringB = document.createElement('div');
+        ringB.className = 'supernova-ring-b';
+        nova.appendChild(ringB);
+
+        starfield.appendChild(nova);
+
+        // Collapse star
+        setTimeout(() => {
+            el.style.transition = 'all 0.5s ease';
+            el.style.opacity    = '0';
+            el.style.width      = '1px';
+            el.style.height     = '1px';
+            el.style.boxShadow  = 'none';
+        }, 250);
+
+        // Cleanup
+        setTimeout(() => nova.remove(), 1600);
+
+        // Respawn at a new position
+        setTimeout(() => {
+            star.x = Math.random() * 100;
+            star.y = Math.random() * 100;
+            el.style.left       = star.x + '%';
+            el.style.top        = star.y + '%';
+            el.style.width      = star.size + 'px';
+            el.style.height     = star.size + 'px';
+            el.style.background = star.color;
+            el.style.boxShadow  = 'none';
+            el.style.transition = 'opacity 1.2s ease';
+            el.style.opacity    = star.type === 'twinkler' ? '0' : String(star.baseOpacity);
+            star.alive = true;
+        }, 1700);
+
+        setTimeout(triggerSupernova, 8000 + Math.random() * 7000);
+    }
+    setTimeout(triggerSupernova, 6000 + Math.random() * 4000);
+
+    // --- SHOOTING STARS (top-left → bottom-right) ---
+    function createShootingStar() {
+        const el  = document.createElement('div');
+        const sx  = 5  + Math.random() * 50;   // spawn in left half
+        const sy  = 3  + Math.random() * 35;   // spawn in upper third
+        const len = 90 + Math.random() * 70;
+        el.style.cssText = [
+            `position:absolute`,
+            `left:${sx}%`,
+            `top:${sy}%`,
+            `width:${len}px`,
+            `height:1.5px`,
+            // Gradient: transparent tail (left) → bright head (right)
+            `background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.25) 30%,rgba(255,255,255,0.95) 100%)`,
+            `border-radius:2px`,
+            `transform:rotate(35deg)`,
+            `opacity:0`,
+            `animation:shooting-star-anim 0.8s ease-out forwards`,
+            `pointer-events:none`,
+            `z-index:1`,
+        ].join(';');
+        starfield.appendChild(el);
+        setTimeout(() => el.remove(), 900);
+        setTimeout(createShootingStar, 20000 + Math.random() * 25000);
+    }
+    setTimeout(createShootingStar, 9000 + Math.random() * 8000);
+
+    // --- ANIMATION LOOP ---
+    const SHOCKWAVE_DURATION = 700;
+    const SHOCKWAVE_MAX_RADIUS = 350;
+    const SHOCKWAVE_RING_WIDTH = 60;
+
+    function animate(timestamp) {
+        const W = window.innerWidth;
+        const H = window.innerHeight;
+        const repulsionRadius = 170;
+
+        // Expire old shockwave
+        if (shockwave && timestamp - shockwave.time > SHOCKWAVE_DURATION) {
+            shockwave = null;
+        }
 
         stars.forEach(star => {
-            // Convert percentage to pixels for calculation
-            const starX = (star.x / 100) * width;
-            const starY = (star.y / 100) * height;
+            if (!star.alive) return;
 
-            const dx = mouseX - starX;
-            const dy = mouseY - starY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+            const sx   = (star.x / 100) * W;
+            const sy   = (star.y / 100) * H;
+            const dx   = mouseX - sx;
+            const dy   = mouseY - sy;
+            const dist = Math.hypot(dx, dy);
 
-            if (distance < repulsionRadius) {
-                // Calculate repulsion force (stronger when closer)
-                const force = (repulsionRadius - distance) / repulsionRadius;
+            let moveX = 0, moveY = 0;
+            let isRepulsed = false;
+
+            // Blackhole gravity-lens repulsion
+            if (dist < repulsionRadius && dist > 0) {
+                isRepulsed = true;
+                const force = Math.pow(1 - dist / repulsionRadius, 2);
                 const angle = Math.atan2(dy, dx);
 
-                // Repel away from cursor
-                // Max displacement of 50px
-                const moveX = Math.cos(angle) * force * -50;
-                const moveY = Math.sin(angle) * force * -50;
+                // Radial push + tangential arc (gravitational lensing)
+                moveX = Math.cos(angle) * force * -65 + (-Math.sin(angle) * force * 14);
+                moveY = Math.sin(angle) * force * -65 + ( Math.cos(angle) * force * 14);
 
-                star.element.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                star.element.style.opacity = 1;
-                // Cyan glow
-                star.element.style.boxShadow = `0 0 ${10 * force}px rgba(34, 211, 238, 0.8)`;
-            } else {
-                // Reset to original state
-                star.element.style.transform = 'translate(0, 0)';
-                star.element.style.opacity = 0.3;
-                star.element.style.boxShadow = 'none';
+                // Directional motion-blur trail pointing toward cursor
+                const trailX = Math.cos(angle) * force * 12;
+                const trailY = Math.sin(angle) * force * 12;
+
+                star.element.style.opacity    = '1';
+                star.element.style.background = '#22d3ee';
+                star.element.style.boxShadow  =
+                    `0 0 ${(8 * force).toFixed(1)}px rgba(34,211,238,0.9),` +
+                    `${trailX.toFixed(1)}px ${trailY.toFixed(1)}px ${(6 * force).toFixed(1)}px rgba(34,211,238,0.35)`;
+            }
+
+            // Click-shockwave displacement (additive)
+            if (shockwave) {
+                const elapsed  = timestamp - shockwave.time;
+                const progress = elapsed / SHOCKWAVE_DURATION;
+                const waveR    = SHOCKWAVE_MAX_RADIUS * progress;
+                const sdx      = sx - shockwave.x;
+                const sdy      = sy - shockwave.y;
+                const sdist    = Math.hypot(sdx, sdy);
+
+                if (sdist > 0 && Math.abs(sdist - waveR) < SHOCKWAVE_RING_WIDTH) {
+                    const proximity = 1 - Math.abs(sdist - waveR) / SHOCKWAVE_RING_WIDTH;
+                    const sforce    = proximity * (1 - progress);
+                    const sangle    = Math.atan2(sdy, sdx);
+                    moveX += Math.cos(sangle) * sforce * 25;
+                    moveY += Math.sin(sangle) * sforce * 25;
+                }
+            }
+
+            star.element.style.transform = `translate(${moveX}px,${moveY}px)`;
+
+            // Idle star behaviour (only when not being repulsed by cursor)
+            if (!isRepulsed) {
+                star.element.style.background = star.color;
+
+                if (star.type === 'twinkler') {
+                    const t = 0.1 + 0.28 * (0.5 + 0.5 * Math.sin(timestamp * star.twinkleSpeed + star.twinklePhase));
+                    star.element.style.opacity   = String(t);
+                    star.element.style.boxShadow = 'none';
+                } else if (star.type === 'giant') {
+                    const pulse = star.baseOpacity + 0.18 * Math.sin(timestamp * star.pulseSpeed + star.pulsePhase);
+                    const gi    = 0.25 + 0.25 * Math.sin(timestamp * star.pulseSpeed + star.pulsePhase);
+                    star.element.style.opacity   = String(Math.max(0, Math.min(1, pulse)));
+                    star.element.style.boxShadow = `0 0 ${(3 + 3 * gi).toFixed(1)}px rgba(255,228,176,${(gi * 0.7).toFixed(2)})`;
+                } else {
+                    star.element.style.opacity   = String(star.baseOpacity);
+                    star.element.style.boxShadow = 'none';
+                }
             }
         });
 
         requestAnimationFrame(animate);
     }
 
-    animate();
+    requestAnimationFrame(animate);
 }
 
 // Mobile Menu
@@ -341,3 +552,49 @@ if (videoContainer && scrollLeftBtn && scrollRightBtn) {
         videoContainer.scrollBy({ left: (cardWidth + gap), behavior: 'smooth' });
     });
 }
+
+// ============================================================
+// SECTION ENTRY ANIMATIONS (staggered fade-up on scroll)
+// ============================================================
+(function () {
+    if (prefersReducedMotion) return;
+
+    const cards = document.querySelectorAll('.hud-card');
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const card = entry.target;
+            const delay = Number(card.dataset.entryDelay || 0);
+
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+                card.style.opacity    = '1';
+                card.style.transform  = 'translateY(0)';
+
+                // After entrance finishes, restore the default card transition
+                // so hover effects (translateY(-5px)) work normally again
+                setTimeout(() => {
+                    card.style.transition = '';
+                    card.style.transform  = '';
+                }, 700);
+            }, delay);
+
+            io.unobserve(card);
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+    cards.forEach((card, i) => {
+        card.style.opacity         = '0';
+        card.style.transform       = 'translateY(24px)';
+        card.dataset.entryDelay    = String((i % 4) * 90); // stagger up to ~270ms
+        io.observe(card);
+    });
+
+    // Attach card-image class to all aspect-ratio image wrappers inside cards
+    // so the CSS zoom + cyan tint overlay applies automatically
+    cards.forEach(card => {
+        const wrap = card.querySelector('[class*="aspect-"]');
+        if (wrap) wrap.classList.add('card-image');
+    });
+})();
