@@ -10,7 +10,7 @@
         content="Connect with MD Nahid Hasan — save contact, social links, academic CV, industry resume, and portfolio showreel.">
 
     <link rel="canonical" href="https://nahidux.com/link/">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="../favicon.png">
 
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://nahidux.com/link/">
@@ -30,9 +30,12 @@
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Tektur:wght@400;700;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <style>
+        /* Hard-set background early to prevent any white flash before Tailwind CDN loads */
+        html, body { background: #0a0a0f !important; color: #fff; }
+
         /* Page-specific additions — extend, do not override theme */
         .reel {
             position: relative;
@@ -313,10 +316,10 @@
     <nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-cyan-500/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <a href="/" class="tektur font-bold text-xl glitch" data-text="MD NAHID HASAN" style="color:#fff; text-decoration:none;">
+                <a href="../" class="tektur font-bold text-xl glitch" data-text="MD NAHID HASAN" style="color:#fff; text-decoration:none;">
                     MD NAHID HASAN
                 </a>
-                <a href="/" class="text-cyan-400 hover:text-cyan-300 transition-colors tektur text-sm" style="letter-spacing:0.1em;">
+                <a href="../" class="text-cyan-400 hover:text-cyan-300 transition-colors tektur text-sm" style="letter-spacing:0.1em;">
                     ← PORTFOLIO
                 </a>
             </div>
@@ -329,7 +332,7 @@
         <section class="text-center mb-12">
             <div class="hud-card p-6 mb-6 inline-block" style="display:inline-block;">
                 <div class="photo-frame">
-                    <img src="/image/nahid_photo/nahid.jpg" alt="MD Nahid Hasan" loading="eager">
+                    <img src="../image/nahid_photo/nahid.jpg" alt="MD Nahid Hasan" loading="eager">
                 </div>
             </div>
 
@@ -825,10 +828,10 @@
         }
 
         document.getElementById('downloadAcademicCV').addEventListener('click', () => {
-            downloadDoc('/link/cv-academic.pdf', 'MD_Nahid_Hasan_Academic_CV.pdf', 'Academic CV');
+            downloadDoc('cv-academic.pdf', 'MD_Nahid_Hasan_Academic_CV.pdf', 'Academic CV');
         });
         document.getElementById('downloadIndustryResume').addEventListener('click', () => {
-            downloadDoc('/link/resume-industry.pdf', 'MD_Nahid_Hasan_Industry_Resume.pdf', 'Industry Resume');
+            downloadDoc('resume-industry.pdf', 'MD_Nahid_Hasan_Industry_Resume.pdf', 'Industry Resume');
         });
 
         // Showreel — lazy YouTube. Replace SHOWREEL_ID with real video.
